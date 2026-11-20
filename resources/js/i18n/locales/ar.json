@@ -320,5 +320,18 @@
     "find_slug_placeholder": "أدخل المعرف الدقيق للبحث...",
     "role_found": "تم العثور على الدور!",
     "role_not_found": "لم يتم العثور على دور بهذا المعرف."
+  },
+  "admin_nav": {
+    "admin_console": "لوحة الإدارة",
+    "management": "الإدارة",
+    "menu": "القائمة",
+    "dashboard": "الرئيسية",
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج",
+    "navigation": "التنقل",
+    "all_sections": "جميع الأقسام",
+    "home": "الرئيسية",
+    "orders": "الطلبات",
+    "website_settings": "الإعدادات"
   }
 }

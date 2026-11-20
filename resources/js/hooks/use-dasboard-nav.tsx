@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
 import useImport from './use-imports';
-import { BarChart3, FolderTree, Globe, LayoutGrid, ShieldCheck, Superscript, Users2 } from 'lucide-react';
+import {
+    BarChart3,
+    FolderTree,
+    Globe,
+    Image,
+    LayoutGrid,
+    Package,
+    ShieldCheck,
+    ShoppingCart,
+    Users2,
+} from 'lucide-react';
 
 export default function useDasboardnav() {
-    const { t } = useImport()
+    const { t } = useImport();
     const navItems = [
         {
             title: t('dashboard.sidebar.overview'),
@@ -13,27 +23,27 @@ export default function useDasboardnav() {
         {
             title: t('dashboard.sidebar.categories'),
             href: '/categories',
-            icon: LayoutGrid,
+            icon: FolderTree,
         },
         {
             title: t('dashboard.sidebar.products'),
             href: '/products/page',
-            icon: LayoutGrid,
+            icon: Package,
         },
         {
             title: t('dashboard.sidebar.orders'),
             href: '/orders/page',
-            icon: LayoutGrid,
+            icon: ShoppingCart,
         },
         {
             title: t('dashboard.sidebar.store_setting'),
             href: '/website/settings/page',
-            icon: LayoutGrid,
+            icon: Globe,
         },
         {
             title: t('dashboard.sidebar.banners'),
             href: '/banners/page',
-            icon: LayoutGrid,
+            icon: Image,
         },
         {
             title: t('dashboard.sidebar.suppliers'),
@@ -45,9 +55,9 @@ export default function useDasboardnav() {
             href: '/roles/page',
             icon: ShieldCheck,
         },
-
     ];
+
     return {
-        navItems
-    }
+        navItems,
+    };
 }

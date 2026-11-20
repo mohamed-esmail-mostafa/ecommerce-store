@@ -319,5 +319,18 @@
         "find_slug_placeholder": "Enter exact slug to search...",
         "role_found": "Role found!",
         "role_not_found": "Role not found for this slug."
+    },
+    "admin_nav": {
+        "admin_console": "Admin Console",
+        "management": "Management",
+        "menu": "Menu",
+        "dashboard": "Dashboard",
+        "profile": "Profile",
+        "logout": "Logout",
+        "navigation": "Navigation",
+        "all_sections": "All Sections",
+        "home": "Home",
+        "orders": "Orders",
+        "website_settings": "Settings"
     }
 }

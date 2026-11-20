@@ -32,7 +32,7 @@ export default function DashboardLayout({ children, className = '' }: { children
                 <DashboardHeader url={url} />
 
                 {/* Page Content */}
-                <main className={`flex-1 p-2 md:p-2 container w-full mx-auto ${className}`}>
+                <main className={`flex-1 p-2 md:p-2 pb-20 lg:pb-2 container w-full mx-auto ${className}`}>
                     {children}
                 </main>
             </div>
