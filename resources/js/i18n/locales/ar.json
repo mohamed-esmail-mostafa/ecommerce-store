@@ -130,7 +130,9 @@
         "title_required": " هذا الحقل مطلوب ",
         "price_min": " السعر يجب ان يكون اكبر من 0 ",
         "stock_min": " الستوك يجب ان يكون اكبر من 0 ",
-        "category_required": " القسم مطلوب "
+        "category_required": " القسم مطلوب ",
+        "type_required": "نوع البنر مطلوب",
+        "desktop_image_required": "صورة سطح المكتب مطلوبة"
     },
     "home": {
         "featured": {
@@ -256,5 +258,43 @@
     "address": "العنوان",
     "save_changes": "حفظ الإعدادات",
     "updated_success": "تم تحديث إعدادات الموقع بنجاح!"
+  },
+  "banners": {
+    "page_title": "إدارة البنرات",
+    "page_subtitle": "إدارة سلايدر الواجهة الرئيسية، والبنرات الترويجية، وروابط الحملات",
+    "add_banner": "إضافة بنر",
+    "edit_banner": "تعديل البنر",
+    "delete_banner": "حذف البنر",
+    "delete_confirm": "هل أنت متأكد من رغبتك في حذف هذا البنر؟ سيؤدي هذا الإجراء إلى حذف البنر والصور المرفوعة نهائياً.",
+    "all_types": "جميع الأنواع",
+    "sliders": "سلايدر",
+    "sections": "أقسام ترويجية",
+    "total_banners": "إجمالي البنرات",
+    "active_banners": "مفعل",
+    "inactive_banners": "غير مفعل",
+    "title": "العنوان",
+    "title_placeholder": "مثال: عروض الصيف الكبرى - خصم يصل إلى 50%",
+    "description": "الوصف",
+    "description_placeholder": "وصف ترويجي اختياري أو عنوان فرعي...",
+    "type": "نوع البنر",
+    "type_slider": "سلايدر الواجهة الرئيسية",
+    "type_section": "قسم ترويجي",
+    "select_type": "اختر نوع البنر",
+    "desktop_image": "صورة سطح المكتب",
+    "mobile_image": "صورة الهاتف (اختياري)",
+    "link": "رابط التوجيه",
+    "link_placeholder": "مثال: /shop أو https://...",
+    "button_text": "نص الزر",
+    "button_text_placeholder": "مثال: تسوق الآن، اكتشف المزيد...",
+    "status": "حالة البنر",
+    "status_active": "نشط",
+    "status_inactive": "غير نشط",
+    "is_active_label": "تفعيل وظهور هذا البنر في المتجر",
+    "view_link": "زيارة الرابط",
+    "filter_all": "الكل",
+    "no_banners": "لا توجد بنرات",
+    "no_banners_desc": "لم تقم بإنشاء أي بنرات حتى الآن. اضغط على 'إضافة بنر' للبدء.",
+    "slider_badge": "سلايدر",
+    "section_badge": "قسم ترويجي"
   }
 }

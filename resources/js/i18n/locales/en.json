@@ -129,7 +129,9 @@
         "title_required": "Title Required",
         "price_min": "Price Must Be Greater Than 0",
         "stock_min": "Stock Must Be Greater Than 0",
-        "category_required": "Category Required"
+        "category_required": "Category Required",
+        "type_required": "Banner type is required",
+        "desktop_image_required": "Desktop image is required"
     },
     "home": {
         "featured": {
@@ -255,5 +257,43 @@
         "address": "Physical Address",
         "save_changes": "Save Settings",
         "updated_success": "Website settings updated successfully!"
+    },
+    "banners": {
+        "page_title": "Banners Management",
+        "page_subtitle": "Manage hero sliders, promotional banners, and campaign links",
+        "add_banner": "Add Banner",
+        "edit_banner": "Edit Banner",
+        "delete_banner": "Delete Banner",
+        "delete_confirm": "Are you sure you want to delete this banner? This action will remove the banner and its uploaded images.",
+        "all_types": "All Types",
+        "sliders": "Sliders",
+        "sections": "Sections",
+        "total_banners": "Total Banners",
+        "active_banners": "Active",
+        "inactive_banners": "Inactive",
+        "title": "Title",
+        "title_placeholder": "e.g. Summer Mega Sale - Up to 50% Off",
+        "description": "Description",
+        "description_placeholder": "Optional promotional copy or subtitle...",
+        "type": "Banner Type",
+        "type_slider": "Hero Slider",
+        "type_section": "Promotional Section",
+        "select_type": "Select Banner Type",
+        "desktop_image": "Desktop Banner Image",
+        "mobile_image": "Mobile Banner Image (Optional)",
+        "link": "Link / Target URL",
+        "link_placeholder": "e.g. /shop or https://...",
+        "button_text": "Button Text",
+        "button_text_placeholder": "e.g. Shop Now, Explore...",
+        "status": "Active Status",
+        "status_active": "Active",
+        "status_inactive": "Inactive",
+        "is_active_label": "Make this banner visible in the store",
+        "view_link": "Visit Link",
+        "filter_all": "All",
+        "no_banners": "No Banners Found",
+        "no_banners_desc": "You haven't created any banners yet. Click 'Add Banner' to start.",
+        "slider_badge": "Slider",
+        "section_badge": "Section"
     }
 }
