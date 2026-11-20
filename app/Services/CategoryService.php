@@ -19,7 +19,7 @@ class CategoryService
 
     public function GetAll()
     {
-        return Category::all();
+        return Category::with('parent')->latest()->get();
     }
     public function Store(StoreCategoryRequest $request)
     {
@@ -28,7 +28,7 @@ class CategoryService
         $category->name_en = $request->name_en;
         $category->description_en = $request->description_en;
         $category->description_ar = $request->description_ar;
-        $category->parent_id = $request->parent_id;
+        $category->parent_id = $request->filled('parent_id') && $request->parent_id !== 'none' ? (int) $request->parent_id : null;
 
 
 
@@ -62,7 +62,7 @@ class CategoryService
         $category->name_en = $request->name_en;
         $category->description_en = $request->description_en;
         $category->description_ar = $request->description_ar;
-        $category->parent_id = $request->parent_id;
+        $category->parent_id = $request->filled('parent_id') && $request->parent_id !== 'none' ? (int) $request->parent_id : null;
 
 
 
