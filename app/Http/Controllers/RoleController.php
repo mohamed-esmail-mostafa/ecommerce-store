@@ -4,63 +4,65 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use App\Models\Role;
+use App\Services\RoleService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class RoleController extends Controller
 {
+    public function __construct(protected RoleService $role_service) {}
+
     /**
-     * Display a listing of the resource.
+     * Display the roles page.
      */
-    public function index()
+    public function roles_page(): Response
     {
-        //
+        return Inertia::render('roles/index', [
+            'roles' => $this->role_service->getAllRoles(),
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a new role.
      */
-    public function create()
+    public function store_role(StoreRoleRequest $request): RedirectResponse
     {
-        //
+        $this->role_service->createRole($request);
+
+        return redirect()->back();
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Find a role by its slug and return as JSON.
      */
-    public function store(StoreRoleRequest $request)
+    public function find_by_slug(string $slug): JsonResponse
     {
-        //
+        $role = $this->role_service->findRoleBySlug($slug);
+
+        return response()->json([
+            'role' => $role,
+        ]);
     }
 
     /**
-     * Display the specified resource.
+     * Update an existing role.
      */
-    public function show(Role $role)
+    public function update_role(UpdateRoleRequest $request, string $slug): RedirectResponse
     {
-        //
+        $this->role_service->updateRole($request, $slug);
+
+        return redirect()->back();
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Delete an existing role.
      */
-    public function edit(Role $role)
+    public function delete_role(string $slug): RedirectResponse
     {
-        //
-    }
+        $this->role_service->deleteRole($slug);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateRoleRequest $request, Role $role)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Role $role)
-    {
-        //
+        return redirect()->back();
     }
 }

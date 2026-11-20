@@ -40,6 +40,11 @@ export default function useDasboardnav() {
             href: '/suppliers/page',
             icon: Users2,
         },
+        {
+            title: t('dashboard.sidebar.roles'),
+            href: '/roles/page',
+            icon: ShieldCheck,
+        },
 
     ];
     return {

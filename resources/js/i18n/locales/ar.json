@@ -7,7 +7,8 @@
             "orders": "الطلبات",
             "suppliers": "الموردين",
             "store_setting": "الاعدادات",
-            "banners": "البنرات"
+            "banners": "البنرات",
+            "roles": "الأدوار والصلاحيات"
         }
     },
     "common": {
@@ -132,7 +133,8 @@
         "stock_min": " الستوك يجب ان يكون اكبر من 0 ",
         "category_required": " القسم مطلوب ",
         "type_required": "نوع البنر مطلوب",
-        "desktop_image_required": "صورة سطح المكتب مطلوبة"
+        "desktop_image_required": "صورة سطح المكتب مطلوبة",
+        "role_name_required": "اسم الدور مطلوب"
     },
     "home": {
         "featured": {
@@ -296,5 +298,27 @@
     "no_banners_desc": "لم تقم بإنشاء أي بنرات حتى الآن. اضغط على 'إضافة بنر' للبدء.",
     "slider_badge": "سلايدر",
     "section_badge": "قسم ترويجي"
+  },
+  "roles": {
+    "page_title": "إدارة الأدوار",
+    "page_subtitle": "إدارة أدوار المستخدمين والصلاحيات الإدارية",
+    "add_role": "إضافة دور",
+    "edit_role": "تعديل الدور",
+    "delete_role": "حذف الدور",
+    "name": "اسم الدور",
+    "name_placeholder": "مثال: مسؤول، محرر، مدير متجر...",
+    "slug": "الاسم اللطيف (Slug)",
+    "slug_placeholder": "مثال: administrator (يتم إنشاؤه تلقائياً إذا ترك فارغاً)",
+    "users_assigned": "المستخدمون المعينون",
+    "users_count": "{{count}} مستخدم",
+    "delete_confirm": "هل أنت متأكد من رغبتك في حذف هذا الدور؟",
+    "no_roles": "لا توجد أدوار",
+    "no_roles_desc": "لم يتم إنشاء أي أدوار بعد. اضغط على 'إضافة دور' للبدء.",
+    "search_placeholder": "البحث بالاسم أو المعرف...",
+    "total_roles": "إجمالي الأدوار",
+    "find_by_slug": "البحث عن دور بالمعرف",
+    "find_slug_placeholder": "أدخل المعرف الدقيق للبحث...",
+    "role_found": "تم العثور على الدور!",
+    "role_not_found": "لم يتم العثور على دور بهذا المعرف."
   }
 }
