@@ -373,5 +373,16 @@
         "home": "Home",
         "orders": "Orders",
         "website_settings": "Settings"
+    },
+    "hero": {
+        "shop_now": "Shop Now",
+        "explore_offers": "Explore Offers",
+        "special_offer": "Special Offer",
+        "featured": "Featured",
+        "limited_time": "Limited Time Deals",
+        "prev_slide": "Previous slide",
+        "next_slide": "Next slide",
+        "default_title": "Discover Exclusive Collections",
+        "default_desc": "Upgrade your lifestyle with our premium curated products and seasonal special deals."
     }
 }

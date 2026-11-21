@@ -8,11 +8,11 @@ import Newsletter from './components/news-letter'
 import HeroSection from './components/hero-section'
 import StoreFeatures from './components/store-features'
 
-export default function HomePage({ categories, products }: any) {
-  console.log(products)
+export default function HomePage({ categories, products ,sliders }: any) {
+ 
   return (
     <UserLayout>
-      <HeroSection />
+      <HeroSection sliders={sliders} />
       <StoreFeatures />
       <CategoriesSection categories={categories} />
       {/* <BannerSection /> */}

@@ -141,4 +141,9 @@ class BannerService
 
         return $banner;
     }
+
+    public function getAllSiders()
+    {
+        return Banner::where('type', 'slider')->get();
+    }
 }
