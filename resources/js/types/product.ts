@@ -28,8 +28,8 @@ export interface Product {
     description: string | null;
     long_description: string | null;
     sku: string | null;
-    price: number;
-    sale_price: number | null;
+    price: number | string;
+    sale_price: number | string | null;
     product_type: ProductType;
     product_kind: ProductKind;
     stock: number;
@@ -40,6 +40,7 @@ export interface Product {
     category: Category;
     supplier?: Supplier | null;
     brandModel?: Brand | null;
+    brand_model?: Brand | null;
     created_at?: string;
     updated_at?: string;
 }
