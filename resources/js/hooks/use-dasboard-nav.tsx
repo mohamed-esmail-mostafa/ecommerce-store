@@ -9,6 +9,7 @@ import {
     Package,
     ShieldCheck,
     ShoppingCart,
+    Tag,
     Users2,
 } from 'lucide-react';
 
@@ -34,6 +35,11 @@ export default function useDasboardnav() {
             title: t('dashboard.sidebar.orders'),
             href: '/orders/page',
             icon: ShoppingCart,
+        },
+        {
+            title: t('dashboard.sidebar.brands', 'Brands'),
+            href: '/brands/page',
+            icon: Tag,
         },
         {
             title: t('dashboard.sidebar.store_setting'),

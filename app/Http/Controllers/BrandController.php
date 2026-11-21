@@ -4,63 +4,52 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
-use App\Models\Brand;
+use App\Services\BrandService;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class BrandController extends Controller
 {
+    public function __construct(protected BrandService $brand_service) {}
+
     /**
-     * Display a listing of the resource.
+     * Display the brands listing page.
      */
-    public function index()
+    public function brandsPage(): Response
     {
-        //
+        return Inertia::render('brands/index', [
+            'brands' => $this->brand_service->getAllBrands(),
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created brand.
      */
-    public function create()
+    public function storeBrand(StoreBrandRequest $request): RedirectResponse
     {
-        //
+        $this->brand_service->CreateBrand($request);
+
+        return redirect()->back();
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update an existing brand.
      */
-    public function store(StoreBrandRequest $request)
+    public function updateBrand(UpdateBrandRequest $request, $id): RedirectResponse
     {
-        //
+        $this->brand_service->UpdateBrand($request, $id);
+
+        return redirect()->back();
     }
 
     /**
-     * Display the specified resource.
+     * Delete a brand.
      */
-    public function show(Brand $brand)
+    public function deleteBrand($id): RedirectResponse
     {
-        //
-    }
+        $this->brand_service->DeleteBrand($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Brand $brand)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateBrandRequest $request, Brand $brand)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Brand $brand)
-    {
-        //
+        return redirect()->back();
     }
 }

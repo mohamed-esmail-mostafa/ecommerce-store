@@ -22,3 +22,4 @@ require __DIR__.'/products.php';
 require __DIR__.'/orders.php';
 require __DIR__.'/banners.php';
 require __DIR__.'/roles.php';
+require __DIR__.'/brands.php';

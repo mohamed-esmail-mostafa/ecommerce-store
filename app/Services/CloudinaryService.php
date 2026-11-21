@@ -4,18 +4,20 @@ namespace App\Services;
 
 use Cloudinary\Api\ApiUtils;
 use Cloudinary\Cloudinary;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Format;
+use Exception;
+use Illuminate\Support\Facades\Log;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Intervention\Image\Format;
+use Intervention\Image\ImageManager;
 
 class CloudinaryService
 {
-    private function cloudinary()
+    private function cloudinary(): Cloudinary
     {
         return new Cloudinary([
             'cloud' => [
                 'cloud_name' => config('services.cloudinary.cloud_name'),
-                'api_key'    => config('services.cloudinary.api_key'),
+                'api_key' => config('services.cloudinary.api_key'),
                 'api_secret' => config('services.cloudinary.api_secret'),
             ],
         ]);
@@ -23,6 +25,8 @@ class CloudinaryService
 
     public function uploadToCloudinary($file, string $folder): ?array
     {
+        $tempPath = null;
+
         try {
             $manager = ImageManager::usingDriver(
                 GdDriver::class
@@ -42,7 +46,7 @@ class CloudinaryService
             );
 
             $tempPath = storage_path(
-                'app/temp_' . uniqid() . '.webp'
+                'app/temp_'.uniqid().'.webp'
             );
 
             $encoded->save($tempPath);
@@ -52,53 +56,54 @@ class CloudinaryService
                 ['folder' => $folder]
             );
 
-            if (file_exists($tempPath)) {
-                unlink($tempPath);
-            }
-
             return [
-                "url" => $result['secure_url'],
-                "public_id" => $result['public_id']
+                'url' => $result['secure_url'],
+                'public_id' => $result['public_id'],
             ];
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
+            Log::error('Cloudinary upload error: '.$e->getMessage());
+
             return null;
+        } finally {
+            if ($tempPath && file_exists($tempPath)) {
+                @unlink($tempPath);
+            }
         }
     }
 
     public function deleteFromCloudinary(?string $publicId): bool
     {
-        if (!$publicId) {
+        if (! $publicId) {
             return false;
         }
 
         try {
             $this->cloudinary()->uploadApi()->destroy($publicId);
+
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
+            Log::error('Cloudinary delete error: '.$e->getMessage());
+
             return false;
         }
     }
 
-
     public function uploadSignture()
     {
-       
         $cloud = $this->cloudinary()->configuration->cloud;
         $timestamp = time();
         $params = [
             'timestamp' => $timestamp,
-            'folder' => 'store-app'
+            'folder' => 'store-app',
         ];
 
         $signture = ApiUtils::signParameters($params, $cloud->apiSecret);
-
 
         return response()->json([
             ...$params,
             'signture' => $signture,
             'api_key' => $cloud->apiKey,
             'cloud_name' => $cloud->cloudName,
-            
         ]);
     }
 }

@@ -8,7 +8,8 @@
             "suppliers": "Suppliers",
             "store_setting": "Settings",
             "banners": "Banners",
-            "roles": "Roles"
+            "roles": "Roles",
+            "brands": "Brands"
         }
     },
     "common": {
@@ -241,13 +242,43 @@
         "page-title": "Products Page",
         "create-page-title": "Create New Product",
         "title": "Product Title",
-        "description": "Description",
+        "title_placeholder": "e.g. Wireless Noise-Cancelling Headphones",
+        "description": "Short Description",
+        "description_placeholder": "Brief overview of key product highlights...",
+        "long_description": "Detailed Description",
         "select-category": "Select Category",
         "select-supplier": "Select Supplier",
+        "brand": "Brand",
+        "select-brand": "Select Brand",
         "stock": "Stock",
         "price": "Price",
         "sale-price": "Sale Price",
-        "summery": "Summery"
+        "summery": "Live Summary",
+        "sku": "SKU",
+        "product_type": "Product Type",
+        "simple": "Simple",
+        "variant": "Variant",
+        "general_info": "General Information",
+        "general_info_desc": "Enter the basic name and descriptions",
+        "pricing_inventory": "Pricing & Inventory",
+        "pricing_inventory_desc": "Set regular price, discounted price, and available inventory",
+        "media": "Product Media",
+        "media_desc": "Upload product gallery images (PNG, JPG, WEBP)",
+        "organization": "Organization",
+        "visibility": "Visibility & Flags",
+        "total_products": "Total Products",
+        "search_placeholder": "Search products on server..."
+    },
+    "brands": {
+        "page_title": "Brands Management",
+        "page_subtitle": "Manage store brands and manufacturer labels",
+        "add_brand": "Add Brand",
+        "edit_brand": "Edit Brand",
+        "delete_brand": "Delete Brand",
+        "name": "Brand Name",
+        "name_placeholder": "e.g. Nike, Apple, Samsung...",
+        "search_placeholder": "Search brands by name...",
+        "total_brands": "Total Brands"
     },
     "website_settings": {
         "title": "Website Settings",

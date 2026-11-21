@@ -1,93 +1,115 @@
-import { useFormikContext } from 'formik'
-import React, { useRef } from 'react'
-import { Button } from './button'
+import React, { useRef } from 'react';
+import { Button } from './button';
 import useImports from '@/hooks/use-imports';
 import { ImageIcon, Trash2Icon, Upload } from 'lucide-react';
-
-interface FormValues {
-    images: File[]
-}
 
 interface ImagesPickerProps {
     name: string;
     images: File[];
-    setFieldValue: (
-        field: string,
-        value: any
-    ) => void;
-    multiple?: boolean
+    setFieldValue: (field: string, value: any) => void;
+    multiple?: boolean;
+    error?: string;
 }
 
-export default function ImagesPicker({ name, images, setFieldValue, multiple = false }: ImagesPickerProps) {
-    const { t } = useImports()
-    const inputRef = useRef<HTMLInputElement>(null)
-
+export default function ImagesPicker({
+    name,
+    images = [],
+    setFieldValue,
+    multiple = true,
+    error,
+}: ImagesPickerProps) {
+    const { t } = useImports();
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(e.target.files || []);
-        setFieldValue(name, multiple ? [...images, ...files] : files.slice(0, 1));
-
-        // allow selecting the same file
-
-        e.target.value = ""
+        if (files.length > 0) {
+            setFieldValue(name, multiple ? [...images, ...files] : files.slice(0, 1));
+        }
+        e.target.value = '';
     };
 
     const removeImage = (index: number) => {
-        setFieldValue(name, images.filter((_, i) => i !== index))
-    }
+        setFieldValue(
+            name,
+            images.filter((_, i) => i !== index)
+        );
+    };
+
     return (
-        <div>
-           <input
-             name="upload"
+        <div className="space-y-3">
+            <input
+                ref={inputRef}
+                name="upload"
                 type="file"
                 onChange={handleChange}
-                accept='image/*'
+                accept="image/*"
                 multiple={multiple}
+                className="hidden"
             />
 
-            <Button type='button' onClick={()=>inputRef.current?.click()}>Choose Images</Button>
-
-
-
-
-            <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <ImageIcon className="w-8 h-8 text-primary" />
+            {/* Drop / Click Zone */}
+            <div
+                onClick={() => inputRef.current?.click()}
+                className="border-2 border-dashed border-border/80 hover:border-primary/60 rounded-2xl flex flex-col items-center justify-center py-8 px-4 text-center cursor-pointer transition-colors bg-muted/20 hover:bg-muted/40"
+            >
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                    <ImageIcon className="w-7 h-7 text-primary" />
                 </div>
-                <div className="mb-2">
-                    <span className="text-sm font-medium text-gray-900 dark:text-white">
-
-                        {t('common.upload-image')}
-                    </span>
-                </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <span className="text-sm font-semibold text-foreground">
+                    {t('common.upload-image')}
+                </span>
+                <p className="text-xs text-muted-foreground mt-1">
                     {t('common.file-size-limit')}
                 </p>
                 <Button
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="mt-4 bg-main hover:bg-second"
-
-                    onClick={() => inputRef.current?.click()}
+                    className="mt-3 gap-1.5 pointer-events-none"
                 >
-                    <Upload className="w-4 h-4 mr-2" />
+                    <Upload className="w-3.5 h-3.5" />
                     {t('common.choose-file')}
                 </Button>
             </div>
 
+            {error && <p className="text-xs text-destructive font-medium">{error}</p>}
 
-
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3'>
-                {images.map((file, index) => (
-                    <div key={`${file.name}-${index}`} className='border rounded-2xl relative overflow-hidden w-44 h-44'>
-                        <img src={URL.createObjectURL(file)} alt={file.name}  />
-                        <Button className='absolute top-4 right-3' type='button' variant="destructive" size="icon" onClick={() => removeImage(index)}>
-                            <Trash2Icon />
-                        </Button>
-                    </div>
-                ))}
-            </div>
+            {/* Thumbnails Grid */}
+            {images.length > 0 && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 pt-2">
+                    {images.map((file, index) => (
+                        <div
+                            key={`${file.name}-${index}`}
+                            className="border border-border/70 rounded-xl relative overflow-hidden aspect-square group shadow-xs bg-muted/40"
+                        >
+                            <img
+                                src={URL.createObjectURL(file)}
+                                alt={file.name}
+                                className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <Button
+                                    type="button"
+                                    variant="destructive"
+                                    size="icon"
+                                    className="size-8 rounded-full"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        removeImage(index);
+                                    }}
+                                    title={t('common.delete')}
+                                >
+                                    <Trash2Icon className="size-4" />
+                                </Button>
+                            </div>
+                            <span className="absolute bottom-1 left-1.5 text-[10px] bg-black/70 text-white px-1.5 py-0.5 rounded font-mono truncate max-w-[85%]">
+                                {file.name}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
-    )
+    );
 }

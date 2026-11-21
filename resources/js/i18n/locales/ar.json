@@ -8,7 +8,8 @@
             "suppliers": "الموردين",
             "store_setting": "الاعدادات",
             "banners": "البنرات",
-            "roles": "الأدوار والصلاحيات"
+            "roles": "الأدوار والصلاحيات",
+            "brands": "العلامات التجارية"
         }
     },
     "common": {
@@ -239,16 +240,46 @@
         "page-title": " صفحة الموردين "
     },
     "products": {
-        "page-title": " صفحة المنتجات ",
-        "create-page-title": " انشاء منتج جديد ",
-        "title": " اسم المنتج ",
-        "description": " وصف المنتج ",
-        "select-category": " اختر القسم ",
-        "select-supplier": " اختر المورد ",
-        "stock": " المخزون ",
-        "price": " السعر ",
-        "sale-price": " السعر بعد التخفيض ",
-        "summery": " الملخص "
+        "page-title": "صفحة المنتجات",
+        "create-page-title": "إنشاء منتج جديد",
+        "title": "اسم المنتج",
+        "title_placeholder": "مثال: سماعات لاسلكية عازلة للضوضاء",
+        "description": "الوصف المختصر",
+        "description_placeholder": "نظرة عامة موجزة على ميزات المنتج...",
+        "long_description": "الوصف المفصل (نص منسق)",
+        "select-category": "اختر القسم",
+        "select-supplier": "اختر المورد",
+        "brand": "العلامة التجارية",
+        "select-brand": "اختر العلامة التجارية",
+        "stock": "المخزون",
+        "price": "السعر",
+        "sale-price": "سعر التخفيض",
+        "summery": "الملخص المباشر",
+        "sku": "رمز التخزين (SKU)",
+        "product_type": "نوع المنتج",
+        "simple": "بسيط",
+        "variant": "متعدد الخيارات",
+        "general_info": "المعلومات العامة",
+        "general_info_desc": "أدخل عنوان المنتج وأوصافه",
+        "pricing_inventory": "التسعير والمخزون",
+        "pricing_inventory_desc": "حدد السعر العادي، سعر الخصم، والكمية المتوفرة",
+        "media": "صور المنتج",
+        "media_desc": "رفع صور المعرض (PNG, JPG, WEBP)",
+        "organization": "التنظيم والتصنيف",
+        "visibility": "الحالة والظهور",
+        "total_products": "إجمالي المنتجات",
+        "search_placeholder": "البحث في المنتجات عبر السيرفر..."
+    },
+    "brands": {
+        "page_title": "إدارة العلامات التجارية",
+        "page_subtitle": "إدارة العلامات التجارية والشركات المصنعة",
+        "add_brand": "إضافة علامة تجارية",
+        "edit_brand": "تعديل العلامة التجارية",
+        "delete_brand": "حذف العلامة التجارية",
+        "name": "اسم العلامة التجارية",
+        "name_placeholder": "مثال: نايكي، أبل، سامسونج...",
+        "search_placeholder": "البحث في العلامات التجارية بالاسم...",
+        "total_brands": "إجمالي العلامات التجارية"
     },
      "website_settings": {
     "title": "إعدادات الموقع",
