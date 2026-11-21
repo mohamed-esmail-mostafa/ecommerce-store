@@ -4,9 +4,11 @@ import TopHeader from '@/components/top-header'
 import Footer from '@/components/footer'
 import BottomNavigation from '@/components/bottom-navigation'
 import MiddleHeader from '@/components/middle-header'
+import { Category } from '@/types/category'
 
 
-export default function UserLayout({ children }: { children: React.ReactNode }) {
+export default function UserLayout({ children, categories }: { children: React.ReactNode; categories?: Category[] }) {
+
   return (
     <>
       <Head title="Shopella — Shop Smart, Live Better">

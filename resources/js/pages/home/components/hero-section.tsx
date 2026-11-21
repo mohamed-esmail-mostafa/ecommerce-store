@@ -104,8 +104,8 @@ export default function HeroSection({ sliders = [] }: HeroSectionProps) {
     }, [emblaApi, onSelect]);
 
     return (
-        <section className="relative w-full py-3 md:py-6 overflow-hidden">
-            <div className="container mx-auto px-4">
+        <section className="relative w-full py-2 md:py-2 overflow-hidden">
+            <div className="container mx-auto px-1">
                 {/* Carousel Root Frame */}
                 <div
                     key={isArabic ? 'rtl' : 'ltr'}

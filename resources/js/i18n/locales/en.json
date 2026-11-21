@@ -384,5 +384,22 @@
         "next_slide": "Next slide",
         "default_title": "Discover Exclusive Collections",
         "default_desc": "Upgrade your lifestyle with our premium curated products and seasonal special deals."
+    },
+    "home_products": {
+        "title": "Trending Products",
+        "subtitle": "Discover our handpicked collection",
+        "view_all": "View All Products",
+        "all": "All",
+        "featured": "Featured",
+        "popular": "Best Sellers",
+        "on_sale": "On Sale",
+        "out_of_stock": "Out of Stock",
+        "in_stock": "In Stock",
+        "low_stock": "Only {{count}} left",
+        "quick_view": "View Details",
+        "add_to_cart": "Add to Cart",
+        "discount": "Off",
+        "show_more": "Explore All Products",
+        "no_products": "No products match this filter."
     }
 }

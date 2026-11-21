@@ -11,7 +11,7 @@ import StoreFeatures from './components/store-features'
 export default function HomePage({ categories, products ,sliders }: any) {
  
   return (
-    <UserLayout>
+    <UserLayout categories={categories}>
       <HeroSection sliders={sliders} />
       <StoreFeatures />
       <CategoriesSection categories={categories} />
