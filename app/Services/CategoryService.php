@@ -21,20 +21,19 @@ class CategoryService
     {
         return Category::with('parent')->latest()->get();
     }
+
     public function Store(StoreCategoryRequest $request)
     {
-        $category = new Category();
+        $category = new Category;
         $category->name_ar = $request->name_ar;
         $category->name_en = $request->name_en;
         $category->description_en = $request->description_en;
         $category->description_ar = $request->description_ar;
         $category->parent_id = $request->filled('parent_id') && $request->parent_id !== 'none' ? (int) $request->parent_id : null;
 
-
-
         $slug = Str::slug($request->name_ar);
         if (empty($slug)) {
-            $slug = 'cat-' . time();
+            $slug = 'cat-'.time();
         }
 
         $category->slug = $slug;
@@ -49,14 +48,13 @@ class CategoryService
             $category->image = $request->image;
         }
         $category->save();
+
         return $category;
     }
-
 
     public function Update(UpdateCategoryRequest $request, string $slug)
     {
 
-        
         $category = $this->GetCategory($slug);
         $category->name_ar = $request->name_ar;
         $category->name_en = $request->name_en;
@@ -64,11 +62,9 @@ class CategoryService
         $category->description_ar = $request->description_ar;
         $category->parent_id = $request->filled('parent_id') && $request->parent_id !== 'none' ? (int) $request->parent_id : null;
 
-
-
         $slug = Str::slug($request->name_ar);
         if (empty($slug)) {
-            $slug = 'cat-' . time();
+            $slug = 'cat-'.time();
         }
 
         $category->slug = $slug;
@@ -84,10 +80,9 @@ class CategoryService
             $category->image = $request->image;
         }
         $category->save();
+
         return $category;
     }
-
-
 
     public function GetCategory(string $slug)
     {
@@ -97,6 +92,7 @@ class CategoryService
     public function DeleteCategory(string $slug)
     {
         Category::where('slug', $slug)->firstOrFail()->delete();
+
         return true;
     }
 }

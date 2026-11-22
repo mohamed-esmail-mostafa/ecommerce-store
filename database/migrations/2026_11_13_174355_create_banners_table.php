@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('public_id')->nullable();
             $table->string('mobile_image')->nullable();
             $table->string('public_mobile_id')->nullable();
-            $table->enum('type',['slider','section'])->default("slider");
+            $table->enum('type', ['slider', 'section'])->default('slider');
             $table->string('link')->nullable();
             $table->string('button_text')->nullable();
             $table->boolean('is_active')->default(true);

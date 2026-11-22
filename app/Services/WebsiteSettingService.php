@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 class WebsiteSettingService
 {
-     /**
+    /**
      * Create a new class instance.
      */
     public function __construct(protected CloudinaryService $cloudinary_service) {}

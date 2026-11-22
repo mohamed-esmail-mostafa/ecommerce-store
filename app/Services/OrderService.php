@@ -11,8 +11,8 @@ class OrderService
         //
     }
 
-
-    public function GetAllOrders(){
+    public function GetAllOrders()
+    {
         return Order::latest()->paginate(10);
     }
 }

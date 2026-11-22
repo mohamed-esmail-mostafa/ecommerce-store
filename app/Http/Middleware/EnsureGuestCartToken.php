@@ -17,7 +17,7 @@ class EnsureGuestCartToken
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() && !$request->cookie('guest_cart_token')) {
+        if (! Auth::check() && ! $request->cookie('guest_cart_token')) {
             cookie()->queue(cookie(
                 'guest_cart_token',
                 (string) Str::uuid(),
@@ -30,7 +30,7 @@ class EnsureGuestCartToken
                 'lax'
             ));
         }
-        
+
         return $next($request);
     }
 }

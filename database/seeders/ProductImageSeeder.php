@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\ProductImage;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ProductImageSeeder extends Seeder
@@ -13,17 +12,16 @@ class ProductImageSeeder extends Seeder
      */
     public function run(): void
     {
-       ProductImage::query()->delete();
+        ProductImage::query()->delete();
         for ($i = 1; $i <= 10000; $i++) {
 
             ProductImage::updateOrCreate(
                 [
-                'product_id'=> fake()->numberBetween(1,10000),
-                'image'=>fake()->imageUrl()
+                    'product_id' => fake()->numberBetween(1, 10000),
+                    'image' => fake()->imageUrl(),
                 ]
             );
-            
-           
+
         }
     }
 }

@@ -27,10 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
-        
-         Inertia::share(
+
+        Inertia::share(
             'settings',
-            fn() => Cache::rememberForever('settings', function () {
+            fn () => Cache::rememberForever('settings', function () {
                 return WebsiteSetting::first()?->toArray() ?? [];
             })
         );
@@ -48,13 +48,13 @@ class AppServiceProvider extends ServiceProvider
         );
 
         Password::defaults(
-            fn(): ?Password => app()->isProduction()
+            fn (): ?Password => app()->isProduction()
                 ? Password::min(12)
-                ->mixedCase()
-                ->letters()
-                ->numbers()
-                ->symbols()
-                ->uncompromised()
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()
                 : null,
         );
     }

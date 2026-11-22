@@ -22,7 +22,7 @@ class UpdateWebsiteSettingRequest extends FormRequest
      */
     public function rules(): array
     {
-         return [
+        return [
             'title_en' => ['nullable', 'string', 'max:255'],
             'title_ar' => ['nullable', 'string', 'max:255'],
             'description_en' => ['nullable', 'string'],

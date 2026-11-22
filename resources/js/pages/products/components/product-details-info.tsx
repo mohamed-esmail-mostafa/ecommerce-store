@@ -167,7 +167,7 @@ export default function ProductDetailsInfo({
         '/add/cart/product',
         {
             product_id: product.id,
-            quantity: 1,
+            quantity: quantity,
         },
         {
             preserveScroll: true,

@@ -17,26 +17,28 @@ class SupplierService
     public function Store(StoreSupplierRequest $request)
     {
         // dd($request);
-        $supplier = new Supplier();
+        $supplier = new Supplier;
         $supplier->name = $request->name;
         $supplier->slug = Str::slug($request->name);
         $supplier->phone = $request->phone;
-        $supplier->address= $request->address;
+        $supplier->address = $request->address;
         $supplier->whatsup = $request->whatsup;
         $supplier->save();
+
         return $supplier;
     }
 
-    public function Update(UpdateSupplierRequest $request,string $slug)
+    public function Update(UpdateSupplierRequest $request, string $slug)
     {
         $supplier = $this->GetSupplier($slug);
-     
+
         $supplier->name = $request->name;
         $supplier->slug = Str::slug($request->name);
         $supplier->phone = $request->phone;
-        $supplier->address= $request->address;
+        $supplier->address = $request->address;
         $supplier->whatsup = $request->whatsup;
         $supplier->save();
+
         return $supplier;
     }
 
@@ -48,8 +50,9 @@ class SupplierService
     public function Delete(string $slug)
     {
         $supplier = $this->GetSupplier($slug);
-       
+
         $supplier->delete();
+
         return true;
     }
 }

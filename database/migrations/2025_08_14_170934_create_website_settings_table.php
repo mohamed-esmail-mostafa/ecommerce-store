@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('whatsup')->nullable();
-            $table->string('currency_ar')->default("ج.م");
-            $table->string('currency_en')->default("EGP");
+            $table->string('currency_ar')->default('ج.م');
+            $table->string('currency_en')->default('EGP');
             $table->timestamps();
         });
     }

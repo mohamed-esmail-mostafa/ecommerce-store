@@ -2,43 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCartRequest;
+use App\Models\CartItem;
 use App\Models\Product;
 use App\Services\CartService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
-class CartController extends Controller {
+class CartController extends Controller
+{
+    public function __construct(protected CartService $cart_service) {}
 
-    public function __construct(protected CartService $cart_service){}
-    // public function add_to_cart(StoreCartRequest $request){
-    //     $this->cart_service->AddToCart($request);
-    // }
+    /**
+     * Display the cart page.
+     */
+    public function index(): Response
+    {
+        $cart = $this->cart_service->getCart()
+            ->load(['items.product.images', 'items.product.category']);
 
+        return Inertia::render('cart/index', [
+            'cart' => $cart,
+        ]);
+    }
 
-
-
-
-
-
-
-
-
-
-
-     public function add(
-        Request $request,
-        CartService $cartService
-    ) {
+    /**
+     * Add a product to the cart.
+     */
+    public function add(Request $request): RedirectResponse
+    {
         $validated = $request->validate([
             'product_id' => ['required', 'exists:products,id'],
             'quantity' => ['nullable', 'integer', 'min:1'],
         ]);
 
-        $product = Product::findOrFail(
-            $validated['product_id']
-        );
+        $product = Product::findOrFail($validated['product_id']);
 
-        $cartService->addProduct(
+        $this->cart_service->addProduct(
             $product,
             $validated['quantity'] ?? 1
         );
@@ -49,13 +50,51 @@ class CartController extends Controller {
         );
     }
 
-    public function index(CartService $cartService)
+    /**
+     * Update the quantity of a specific cart item.
+     */
+    public function update(Request $request, CartItem $item): RedirectResponse
     {
-        $cart = $cartService->getCart()
-            ->load('items.product');
+        $cart = $this->cart_service->getCart();
 
-        return inertia('cart/index', [
-            'cart' => $cart,
+        if ($item->cart_id !== $cart->id) {
+            abort(403, 'Unauthorized cart item access.');
+        }
+
+        $validated = $request->validate([
+            'quantity' => ['required', 'integer', 'min:1'],
         ]);
+
+        $this->cart_service->updateQuantity($item, $validated['quantity']);
+
+        return back()->with('success', 'Cart updated successfully!');
+    }
+
+    /**
+     * Remove an item from the cart.
+     */
+    public function destroy(CartItem $item): RedirectResponse
+    {
+        $cart = $this->cart_service->getCart();
+
+        if ($item->cart_id !== $cart->id) {
+            abort(403, 'Unauthorized cart item access.');
+        }
+
+        $this->cart_service->removeItem($item);
+
+        return back()->with('success', 'Product removed from cart!');
+    }
+
+    /**
+     * Clear all items in the cart.
+     */
+    public function clear(): RedirectResponse
+    {
+        $cart = $this->cart_service->getCart();
+
+        $this->cart_service->clearCart($cart);
+
+        return back()->with('success', 'Cart cleared successfully!');
     }
 }

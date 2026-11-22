@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Supplier;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SupplierSeeder extends Seeder
@@ -19,8 +18,8 @@ class SupplierSeeder extends Seeder
                 'name' => fake()->name(),
                 'slug' => fake()->unique()->name(),
                 'phone' => '01'.fake()->numerify('#########'),
-                'address'=>fake()->address(),
-                'whatsup'=>'01'.fake()->numerify('#########'),
+                'address' => fake()->address(),
+                'whatsup' => '01'.fake()->numerify('#########'),
 
             ]);
         }

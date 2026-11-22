@@ -45,9 +45,9 @@ class HandleInertiaRequests extends Middleware
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
 
             'cartCount' => fn () => app(CartService::class)
-            ->getCart()
-            ->items()
-            ->sum('quantity'),
+                ->getCart()
+                ->items()
+                ->sum('quantity'),
         ];
     }
 }

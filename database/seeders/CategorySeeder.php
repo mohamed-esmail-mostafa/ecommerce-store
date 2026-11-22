@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class CategorySeeder extends Seeder
 {
@@ -104,7 +102,7 @@ class CategorySeeder extends Seeder
                 'name_en' => $category['name_en'],
                 'description_en' => $category['description_en'],
                 'description_ar' => $category['description_ar'],
-                'image' => $category['image']
+                'image' => $category['image'],
             ]);
         }
     }

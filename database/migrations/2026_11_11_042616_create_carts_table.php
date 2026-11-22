@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
-            $table->uuid("guest_token")->nullable()->unique();
-            $table->string("status")->default("active");
-            $table->timestamp("expires_at")->nullable();
+            $table->uuid('guest_token')->nullable()->unique();
+            $table->string('status')->default('active');
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
     }

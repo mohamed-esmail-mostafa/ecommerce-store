@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Brand;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +13,7 @@ class BrandSeeder extends Seeder
      */
     public function run(): void
     {
-         Brand::query()->delete();
+        Brand::query()->delete();
         $brands = [];
 
         for ($i = 1; $i <= 1000; $i++) {
