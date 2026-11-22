@@ -11,14 +11,15 @@ import NavbarIcon from './navbar-icon'
 import AuthMenu from '@/components/auth-menu'
 import DestopNavbar from './destop-navbar'
 import SearchBar from './search-bar'
+import useUserCart from '@/hooks/use-user-cart'
+import { Category } from '@/types/category'
 
 
-export default function DestopHeader() {
+export default function DestopHeader({categories}:{categories:Category[]}) {
     const { t } = useImports()
     const [scrolled, setScrolled] = useState(false);
     const { auth } = useAuth()
-    const [searchQuery, setSearchQuery] = useState()
-    const { navLinks } = useUserNav()
+    const {cartCount}=useUserCart()
 
     useEffect(() => {
         const handler = () => setScrolled(window.scrollY > 60);
@@ -55,7 +56,7 @@ export default function DestopHeader() {
                         <NavbarIcon
                             href="/cart/page"
                             icon={<ShoppingCart size={22} className="group-hover:scale-110 transition-transform" />}
-                            count={0}
+                            count={cartCount}
                             label={t('common.cart')}
                         />
 
@@ -75,7 +76,7 @@ export default function DestopHeader() {
                 </div>
             </div>
             {/* <DesktopNavbar /> */}
-            <DestopNavbar />
+            <DestopNavbar categories={categories} />
         </header>
     )
 }

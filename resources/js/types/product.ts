@@ -44,3 +44,25 @@ export interface Product {
     created_at?: string;
     updated_at?: string;
 }
+
+
+
+export interface ProductFormValues {
+  category_id: string;
+  supplier_id: string;
+  brand_id: string;
+  title: string;
+  slug: string;
+  sku: string;
+  description: string;
+  long_description: string;
+  price: string;
+  sale_price: string;
+  stock: string;
+  product_type: 'simple' | 'variant';
+  product_kind: 'physical' | 'digital';
+  is_active: boolean;
+  is_featured: boolean;
+  is_popular: boolean;
+  images: File[];
+}

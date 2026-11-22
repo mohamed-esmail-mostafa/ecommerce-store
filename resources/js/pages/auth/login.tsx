@@ -27,97 +27,97 @@ export default function Login({ status, canResetPassword }: Props) {
     const { t } = useImports()
     return (
         <>
-            <Head title={t('auth.login')} />    
-            <UserLayout>
+            <Head title={t('auth.login')} />
+         
                 <div className="container mx-auto flex items-center py-20 justify-center">
-                <div className='w-md'>
-                    <Form
-                    {...store.form()}
-                    resetOnSuccess={['password']}
-                    className="flex flex-col gap-6"
-                >
-                    {({ processing, errors }) => (
-                        <>
-                            <div className="grid gap-6">
-                                <div className="grid gap-2">
-                                    <Label htmlFor="email">{t('auth.email')}</Label>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        name="email"
-                                        required
-                                        autoFocus
-                                        tabIndex={1}
-                                        autoComplete="email"
-                                        placeholder="email@example.com"
-                                    />
-                                    <InputError message={errors.email} />
-                                </div>
+                    <div className='w-md'>
+                        <Form
+                            {...store.form()}
+                            resetOnSuccess={['password']}
+                            className="flex flex-col gap-6"
+                        >
+                            {({ processing, errors }) => (
+                                <>
+                                    <div className="grid gap-6">
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="email">{t('auth.email')}</Label>
+                                            <Input
+                                                id="email"
+                                                type="email"
+                                                name="email"
+                                                required
+                                                autoFocus
+                                                tabIndex={1}
+                                                autoComplete="email"
+                                                placeholder="email@example.com"
+                                            />
+                                            <InputError message={errors.email} />
+                                        </div>
 
-                                <div className="grid gap-2">
-                                    <div className="flex items-center">
-                                        <Label htmlFor="password">{t('auth.password')}</Label>
-                                        {canResetPassword && (
-                                            <TextLink
-                                                href={request()}
-                                                className="ml-auto text-sm"
-                                                tabIndex={5}
-                                            >
-                                                {t('auth.forget-password')}
-                                            </TextLink>
-                                        )}
+                                        <div className="grid gap-2">
+                                            <div className="flex items-center">
+                                                <Label htmlFor="password">{t('auth.password')}</Label>
+                                                {canResetPassword && (
+                                                    <TextLink
+                                                        href={request()}
+                                                        className="ml-auto text-sm"
+                                                        tabIndex={5}
+                                                    >
+                                                        {t('auth.forget-password')}
+                                                    </TextLink>
+                                                )}
+                                            </div>
+                                            <PasswordInput
+                                                id="password"
+                                                name="password"
+                                                required
+                                                tabIndex={2}
+                                                autoComplete="current-password"
+                                                placeholder={t('auth.password')}
+                                            />
+                                            <InputError message={errors.password} />
+                                        </div>
+
+                                        <div className="flex items-center space-x-3">
+                                            <Checkbox
+                                                id="remember"
+                                                name="remember"
+                                                tabIndex={3}
+                                            />
+                                            <Label htmlFor="remember">{t('auth.rememberme')}</Label>
+                                        </div>
+
+                                        <Button
+                                            type="submit"
+                                            className="mt-4 w-full"
+                                            tabIndex={4}
+                                            disabled={processing}
+                                            data-test="login-button"
+                                        >
+                                            {processing && <Spinner />}
+                                            {t('auth.login')}
+                                        </Button>
                                     </div>
-                                    <PasswordInput
-                                        id="password"
-                                        name="password"
-                                        required
-                                        tabIndex={2}
-                                        autoComplete="current-password"
-                                        placeholder={t('auth.password')}
-                                    />
-                                    <InputError message={errors.password} />
-                                </div>
 
-                                <div className="flex items-center space-x-3">
-                                    <Checkbox
-                                        id="remember"
-                                        name="remember"
-                                        tabIndex={3}
-                                    />
-                                    <Label htmlFor="remember">{t('auth.rememberme')}</Label>
-                                </div>
+                                    <div className="text-center text-sm text-muted-foreground">
+                                        {t('auth.no-account')}{' '}
+                                        <TextLink href={register()} tabIndex={5}>
+                                            {t('auth.signup')}
+                                        </TextLink>
+                                    </div>
+                                    <SocialLogin />
+                                </>
+                            )}
+                        </Form>
 
-                                <Button
-                                    type="submit"
-                                    className="mt-4 w-full"
-                                    tabIndex={4}
-                                    disabled={processing}
-                                    data-test="login-button"
-                                >
-                                    {processing && <Spinner />}
-                                    {t('auth.login')}
-                                </Button>
+                        {status && (
+                            <div className="mb-4 text-center text-sm font-medium text-green-600">
+                                {status}
                             </div>
-
-                            <div className="text-center text-sm text-muted-foreground">
-                                {t('auth.no-account')}{' '}
-                                <TextLink href={register()} tabIndex={5}>
-                                    {t('auth.signup')}
-                                </TextLink>
-                            </div>
-                            <SocialLogin />
-                        </>
-                    )}
-                </Form>
-
-                {status && (
-                    <div className="mb-4 text-center text-sm font-medium text-green-600">
-                        {status}
+                        )}
                     </div>
-                )}
                 </div>
-            </div>
-            </UserLayout>
+           
         </>
     );
 }

@@ -20,7 +20,7 @@ export default function UserLayout({ children, categories }: { children: React.R
 
       <div className="min-h-screen">
         <TopHeader />
-        <MiddleHeader />
+        <MiddleHeader categories={categories} />
         {/* <MobileHeader /> */}
         <main>
           {children}

@@ -23,3 +23,4 @@ require __DIR__.'/orders.php';
 require __DIR__.'/banners.php';
 require __DIR__.'/roles.php';
 require __DIR__.'/brands.php';
+require __DIR__.'/cart.php';

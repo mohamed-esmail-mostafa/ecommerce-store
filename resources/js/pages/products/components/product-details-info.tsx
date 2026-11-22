@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import {
     Check,
     Copy,
@@ -148,12 +148,45 @@ export default function ProductDetailsInfo({
     };
 
     // Add to cart simulation
+    // const handleAddToCart = () => {
+    //     if (isOutOfStock) return;
+    //     toast.success(
+    //         t('common.product_added', 'Product added to cart successfully!'),
+    //     );
+    //     router.post("/add/cart/product", {
+    //         product_id: product.id
+    //     })
+
+    // };
+
+
     const handleAddToCart = () => {
-        if (isOutOfStock) return;
-        toast.success(
-            t('common.product_added', 'Product added to cart successfully!'),
-        );
-    };
+    if (isOutOfStock) return;
+
+    router.post(
+        '/add/cart/product',
+        {
+            product_id: product.id,
+            quantity: 1,
+        },
+        {
+            preserveScroll: true,
+
+            onSuccess: () => {
+                toast.success(
+                    t(
+                        'common.product_added',
+                        'Product added to cart successfully!'
+                    )
+                );
+            },
+
+            onError: () => {
+                toast.error('Unable to add product to cart.');
+            },
+        }
+    );
+};
 
     return (
         <div className="flex flex-col gap-6">
@@ -409,11 +442,10 @@ export default function ProductDetailsInfo({
                         size="icon"
                         variant="outline"
                         onClick={handleToggleWishlist}
-                        className={`h-12 w-12 shrink-0 rounded-xl border-neutral-300 transition-all dark:border-neutral-700 ${
-                            isWishlisted
+                        className={`h-12 w-12 shrink-0 rounded-xl border-neutral-300 transition-all dark:border-neutral-700 ${isWishlisted
                                 ? 'border-red-300 bg-red-50 text-red-500 dark:bg-red-950/40'
                                 : 'text-neutral-600 hover:text-red-500'
-                        }`}
+                            }`}
                         aria-label="Add to wishlist"
                     >
                         <Heart

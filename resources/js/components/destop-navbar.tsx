@@ -3,12 +3,14 @@ import useUserNav from '@/hooks/use-user-nav';
 import { ChevronDown, Menu } from 'lucide-react';
 import React, { useState } from 'react'
 import { Link } from '@inertiajs/react';
+import { Category } from '@/types/category';
 
-export default function DestopNavbar() {
+export default function DestopNavbar({categories}:{categories:Category[]}) {
     const {t,i18n,isArabic}=useImports();
     const [showCatDropdown, setShowCatDropdown] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const {navLinks}=useUserNav()
+    console.log(categories)
   return (
      <nav className="hidden lg:block border-t border-gray-100 bg-white">
             <div className="max-w-7xl mx-auto px-4">
@@ -19,14 +21,14 @@ export default function DestopNavbar() {
                         onMouseEnter={() => setShowCatDropdown(true)}
                         onMouseLeave={() => setShowCatDropdown(false)}
                     >
-                        <button className="flex items-center gap-2 bg-primary text-white text-sm font-semibold px-5 py-3 hover:bg-secondary transition-colors">
+                        <button className="flex items-center gap-2 bg-primary text-white text-sm font-semibold px-5 py-3 hover:bg-primary/90 transition-colors">
                             <Menu size={16} />
                             {t('common.categories')}
                             <ChevronDown size={14} className={`transition-transform ${showCatDropdown ? 'rotate-180' : ''}`} />
                         </button>
                         {showCatDropdown && (
                             <div className="absolute top-full left-0 bg-white border border-gray-100 shadow-xl rounded-b-lg z-50 w-56 py-2">
-                                {/* {categories.map((category: any) => (
+                                {categories.map((category: any) => (
                                     <Link
                                         key={category.id}
                                         href={category.href}
@@ -35,7 +37,7 @@ export default function DestopNavbar() {
                                         <img src={category.image} alt="" className='w-5 h-5' />
                                         {i18n.language === 'en' ? category.name_en : category.name_ar}
                                     </Link>
-                                ))} */}
+                                ))}
                             </div>
                         )}
                     </div>
