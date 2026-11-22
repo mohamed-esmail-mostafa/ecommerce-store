@@ -1,3 +1,9 @@
+export interface PaginationLink {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
 export interface Pagination<T> {
     data: T[];
     current_page: number;
@@ -8,4 +14,7 @@ export interface Pagination<T> {
     total: number;
     prev_page_url: string | null;
     next_page_url: string | null;
+    links?: PaginationLink[];
+    from?: number;
+    to?: number;
 }

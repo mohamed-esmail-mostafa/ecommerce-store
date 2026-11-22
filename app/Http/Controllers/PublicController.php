@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Services\BannerService;
+use App\Services\BrandService;
 use App\Services\CategoryService;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PublicController extends Controller
@@ -12,7 +15,8 @@ class PublicController extends Controller
     public function __construct(
         protected CategoryService $category_service,
         protected ProductService $product_service,
-        protected BannerService $banner_service
+        protected BannerService $banner_service,
+        protected BrandService $brand_service,
     ) {}
 
     public function home_page()
@@ -36,9 +40,43 @@ class PublicController extends Controller
         return Inertia::render('cart/index');
     }
 
-    public function shop_page()
+    public function shop_page(Request $request, $categoryId = null)
     {
-        return Inertia::render('shop/index');
+        $filters = $request->only([
+            'search',
+            'category_id',
+            'brand_id',
+            'min_price',
+            'max_price',
+            'in_stock',
+            'on_sale',
+            'product_kind',
+            'sort',
+            'per_page',
+        ]);
+
+        if ($categoryId !== null) {
+            $filters['category_id'] = $categoryId;
+        }
+
+        $products = $this->product_service->GetShopProducts($filters);
+        $categories = $this->category_service->GetAll();
+        $brands = $this->brand_service->getAllBrands();
+
+        $minPrice = Product::where('is_active', true)->min('price') ?? 0;
+        $maxPrice = Product::where('is_active', true)->max('price') ?? 1000;
+
+        return Inertia::render('shop/index', [
+            'products' => $products,
+            'categories' => $categories,
+            'brands' => $brands,
+            'filters' => $filters,
+            'priceRange' => [
+                'min' => (float) $minPrice,
+                'max' => (float) $maxPrice,
+            ],
+            'selectedCategoryId' => $categoryId ? (int) $categoryId : null,
+        ]);
     }
 
     public function wishlist_page()

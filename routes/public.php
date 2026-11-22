@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(PublicController::class)->group(function () {
     Route::get('/', 'home_page')->name('home');
     Route::get('/product/{slug}/details', 'product_details')->name('product.details.page');
-    Route::get('/shop/page', 'shop_page')->name('shop.page');
+    Route::get('/shop/page/{categoryId?}', 'shop_page')->name('shop.page');
     Route::get('/wishlist/page', 'wishlist_page')->name('wishlist.page');
     Route::get('/account/page', 'account_page')->name('account.page')->middleware('auth');
     Route::get('/search/page', 'search_page')->name('search.page');

@@ -42,6 +42,144 @@ class ProductService
     }
 
     /**
+     * Get filtered shop products for catalog listing.
+     *
+     * @param  array<string, mixed>  $filters
+     */
+    public function GetShopProducts(array $filters = []): LengthAwarePaginator
+    {
+        $query = Product::with(['category', 'supplier', 'brandModel', 'images'])
+            ->where('is_active', true);
+
+        // Category filter (supports single ID, array, or comma-separated string)
+        if (! empty($filters['category_id'])) {
+            $catVal = $filters['category_id'];
+            if (is_numeric($catVal)) {
+                $query->where('category_id', (int) $catVal);
+            } elseif (is_array($catVal)) {
+                $query->whereIn('category_id', $catVal);
+            } else {
+                $ids = array_filter(explode(',', (string) $catVal), 'is_numeric');
+                if (! empty($ids)) {
+                    $query->whereIn('category_id', $ids);
+                } else {
+                    $query->whereHas('category', function ($q) use ($catVal) {
+                        $q->where('slug', $catVal);
+                    });
+                }
+            }
+        }
+
+        // Brand filter (supports single ID, array, or comma-separated string)
+        if (! empty($filters['brand_id'])) {
+            $brandVal = $filters['brand_id'];
+            if (is_numeric($brandVal)) {
+                $query->where('brand_id', (int) $brandVal);
+            } elseif (is_array($brandVal)) {
+                $query->whereIn('brand_id', $brandVal);
+            } else {
+                $ids = array_filter(explode(',', (string) $brandVal), 'is_numeric');
+                if (! empty($ids)) {
+                    $query->whereIn('brand_id', $ids);
+                }
+            }
+        }
+
+        // Min price
+        if (isset($filters['min_price']) && is_numeric($filters['min_price'])) {
+            $min = (float) $filters['min_price'];
+            $query->where(function ($q) use ($min) {
+                $q->where(function ($sq) use ($min) {
+                    $sq->whereNotNull('sale_price')->where('sale_price', '>=', $min);
+                })->orWhere(function ($sq) use ($min) {
+                    $sq->whereNull('sale_price')->where('price', '>=', $min);
+                });
+            });
+        }
+
+        // Max price
+        if (isset($filters['max_price']) && is_numeric($filters['max_price'])) {
+            $max = (float) $filters['max_price'];
+            $query->where(function ($q) use ($max) {
+                $q->where(function ($sq) use ($max) {
+                    $sq->whereNotNull('sale_price')->where('sale_price', '<=', $max);
+                })->orWhere(function ($sq) use ($max) {
+                    $sq->whereNull('sale_price')->where('price', '<=', $max);
+                });
+            });
+        }
+
+        // In stock only
+        if (! empty($filters['in_stock']) && ($filters['in_stock'] === true || $filters['in_stock'] === '1' || $filters['in_stock'] === 'true')) {
+            $query->where('stock', '>', 0);
+        }
+
+        // On sale only
+        if (! empty($filters['on_sale']) && ($filters['on_sale'] === true || $filters['on_sale'] === '1' || $filters['on_sale'] === 'true')) {
+            $query->whereNotNull('sale_price')->whereColumn('sale_price', '<', 'price');
+        }
+
+        // Product kind (physical / digital)
+        if (! empty($filters['product_kind'])) {
+            $query->where('product_kind', $filters['product_kind']);
+        }
+
+        // Product type (simple / variant)
+        if (! empty($filters['product_type'])) {
+            $query->where('product_type', $filters['product_type']);
+        }
+
+        // Search keyword
+        if (! empty($filters['search'])) {
+            $search = $filters['search'];
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('sku', 'like', "%{$search}%")
+                    ->orWhere('brand', 'like', "%{$search}%")
+                    ->orWhereHas('category', function ($catQuery) use ($search) {
+                        $catQuery->where('name_ar', 'like', "%{$search}%")
+                            ->orWhere('name_en', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('brandModel', function ($bQuery) use ($search) {
+                        $bQuery->where('name', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        // Sorting
+        $sort = $filters['sort'] ?? 'latest';
+        switch ($sort) {
+            case 'price_asc':
+                $query->orderByRaw('COALESCE(sale_price, price) ASC');
+                break;
+            case 'price_desc':
+                $query->orderByRaw('COALESCE(sale_price, price) DESC');
+                break;
+            case 'popular':
+                $query->orderBy('is_popular', 'desc')->latest();
+                break;
+            case 'featured':
+                $query->orderBy('is_featured', 'desc')->latest();
+                break;
+            case 'title_asc':
+                $query->orderBy('title', 'asc');
+                break;
+            case 'title_desc':
+                $query->orderBy('title', 'desc');
+                break;
+            case 'latest':
+            default:
+                $query->latest();
+                break;
+        }
+
+        $perPage = isset($filters['per_page']) && is_numeric($filters['per_page']) ? (int) $filters['per_page'] : 12;
+
+        return $query->paginate($perPage)->withQueryString();
+    }
+
+    /**
      * Store a newly created product.
      */
     public function StoreProduct(StoreProductRequest $request): Product
