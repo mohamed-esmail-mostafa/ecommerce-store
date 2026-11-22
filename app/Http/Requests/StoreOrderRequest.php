@@ -12,7 +12,7 @@ class StoreOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,15 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['required', 'string', 'max:50'],
+            'governorate' => ['required', 'string', 'max:100'],
+            'city' => ['required', 'string', 'max:100'],
+            'address' => ['required', 'string', 'max:500'],
+            'payement_method' => ['required', 'string', 'in:cash_on_delivery,card,mada'],
+            'notes' => ['nullable', 'string', 'max:1000'],
+            'discount' => ['nullable', 'numeric', 'min:0'],
         ];
     }
 }
