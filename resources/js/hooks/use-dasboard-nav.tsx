@@ -61,6 +61,11 @@ export default function useDasboardnav() {
             href: '/roles/page',
             icon: ShieldCheck,
         },
+        {
+            title: t('dashboard.sidebar.users'),
+            href: '/users/page',
+            icon: Users2,
+        },
     ];
 
     return {

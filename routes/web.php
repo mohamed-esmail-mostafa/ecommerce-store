@@ -13,6 +13,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+// require __DIR__.'/redirect.php';
 require __DIR__.'/public.php';
 require __DIR__.'/settings.php';
 require __DIR__.'/website-settings.php';
@@ -24,3 +25,4 @@ require __DIR__.'/banners.php';
 require __DIR__.'/roles.php';
 require __DIR__.'/brands.php';
 require __DIR__.'/cart.php';
+require __DIR__.'/users.php';
