@@ -17,8 +17,15 @@ class SupplierFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->company();
+
         return [
-            //
+            'name' => $name,
+            'slug' => str()->slug($name).'-'.fake()->unique()->randomNumber(4),
+            'phone' => fake()->phoneNumber(),
+            'address' => fake()->address(),
+            'whatsup' => fake()->phoneNumber(),
+            'is_active' => true,
         ];
     }
 }
