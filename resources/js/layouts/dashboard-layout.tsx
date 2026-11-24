@@ -18,26 +18,22 @@ export default function DashboardLayout({ children, className = '' }: { children
     };
 
     return (
-        <div className="flex min-h-screen w-full bg-background text-foreground">
+        <div className="flex min-h-screen lg:h-screen lg:overflow-hidden w-full bg-background text-foreground">
             {/* Desktop Sidebar */}
             <DashboardSidebar isCurrent={isCurrent} />
 
-            {/* Mobile Drawer Backdrop & Sidebar */}
-
-
-
             {/* Main Content Area */}
-            <div className="flex flex-1 flex-col min-w-0">
+            <div className="flex flex-1 flex-col min-w-0 lg:h-screen lg:overflow-y-auto">
                 {/* Admin Header */}
                 <DashboardHeader url={url} />
 
                 {/* Page Content */}
-                <main className={`flex-1 p-2 md:p-2 pb-20 lg:pb-2 container w-full mx-auto ${className}`}>
+                <main className={`flex-1 p-2 md:p-2 pb-20 lg:pb-6 container w-full mx-auto ${className}`}>
                     {children}
                 </main>
             </div>
 
             <DashboardNavigationBottom />
         </div>
-    )
+    );
 }

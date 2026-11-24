@@ -10,9 +10,9 @@ export default function DashboardDesktopSidebar({ isCurrent }: any) {
     const { navItems } = useDasboardnav()
     const { auth } = useAuth()
     return (
-        <aside className="hidden w-64 shrink-0 border-e border-border/70 bg-card lg:flex lg:flex-col">
+        <aside className="hidden w-64 shrink-0 border-e border-border/70 bg-card lg:flex lg:flex-col lg:h-screen lg:sticky lg:top-0">
             {/* Brand / Logo */}
-            <div className="flex h-16 items-center gap-3 border-b border-border/60 px-6">
+            <div className="flex h-16 shrink-0 items-center gap-3 border-b border-border/60 px-6">
                 <div className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-xs">
                     <Shield className="size-5" />
                 </div>
@@ -27,7 +27,7 @@ export default function DashboardDesktopSidebar({ isCurrent }: any) {
             </div>
 
             {/* Navigation Links */}
-            <nav className="flex-1 space-y-1.5 p-4">
+            <nav className="flex-1 space-y-1.5 p-4 overflow-y-auto overflow-x-hidden">
                 {navItems.map((item) => {
                     const Icon = item.icon;
                     const active = isCurrent(item.href);
@@ -48,7 +48,7 @@ export default function DashboardDesktopSidebar({ isCurrent }: any) {
             </nav>
 
             {/* Sidebar User Footer */}
-            <div className="border-t border-border/60 p-4">
+            <div className="border-t border-border/60 p-4 shrink-0">
                 <div className="flex items-center gap-3 rounded-lg bg-muted/40 p-2.5">
                     <Avatar className="size-8">
                         <AvatarImage src={auth?.user?.avatar} alt={auth?.user?.name || 'Admin'} />
