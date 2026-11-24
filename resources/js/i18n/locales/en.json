@@ -108,7 +108,8 @@
         "choose-file": "Choose File",
         "previous": "Previous",
         "next": "Next",
-        "show-more":"Show More"
+        "show-more":"Show More",
+        "dashboard":"Dashboard"
     },
     "auth": {
         "login": "Log in",
@@ -331,7 +332,10 @@
         "phone": "Phone Number",
         "address": "Physical Address",
         "save_changes": "Save Settings",
-        "updated_success": "Website settings updated successfully!"
+        "updated_success": "Website settings updated successfully!",
+        "currency_en":"Currency En",
+        "currency_ar":"Currency Ar",
+        "currency_tab":"Currency Tab"
     },
     "banners": {
         "page_title": "Banners Management",

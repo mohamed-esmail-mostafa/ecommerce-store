@@ -9,12 +9,13 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import useAuth from '@/hooks/use-auth';
 import { router, Link } from '@inertiajs/react';
-import { LogOut, UserIcon } from 'lucide-react';
+import { CircleDashed, LogOut, UserIcon } from 'lucide-react';
 import useImports from '@/hooks/use-imports';
 
 export default function AuthMenu() {
     const { auth } = useAuth()
     const { t } = useImports()
+   
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -47,6 +48,17 @@ export default function AuthMenu() {
                         <span>{t('admin_nav.profile')}</span>
                     </Link>
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                
+                {auth.user.role?.slug === "admin" ? 
+                <DropdownMenuItem asChild>
+                    <Link href="/settings/profile" className="flex items-center gap-2 text-xs">
+                        <CircleDashed className="size-3.5" />
+                        <span>{t('common.dashboard')}</span>
+                    </Link>
+                </DropdownMenuItem>
+            : null    
+            }
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                     onClick={() => router.post('/logout')}

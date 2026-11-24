@@ -4,10 +4,13 @@ import useWebsiteSettings from '@/hooks/use-website-settings'
 import { Languages, LanguagesIcon, Mail, Moon, Phone, Sun } from 'lucide-react'
 import React from 'react'
 import { Link } from '@inertiajs/react'
+import useAuth from '@/hooks/use-auth'
+import AuthMenu from './auth-menu'
 
 export default function TopHeader() {
     const { t, toggleLanguage, toggleTheme, appearance, isDark } = useImports()
     const {settings}=useWebsiteSettings()
+    const {auth}=useAuth()
     return (
         <div className="bg-black text-white text-xs py-1">
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-9">
@@ -39,7 +42,8 @@ export default function TopHeader() {
                     <Button size="icon" onClick={() => toggleTheme()}>
                         {isDark ? <Sun />:<Moon />}
                     </Button>
-                    <Link href="/login">{t("auth.login")}</Link>
+                   
+                    {auth ? <AuthMenu /> :  <Link href="/login">{t("auth.login")}</Link>}
                 </div>
             </div>
         </div>

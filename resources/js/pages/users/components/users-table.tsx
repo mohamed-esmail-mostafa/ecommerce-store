@@ -297,12 +297,16 @@ export default function UsersTable({
                                                 )}
                                             </div>
                                             <p className="text-xs text-muted-foreground">{user.email}</p>
+
+                                            <div onClick={() => onChangeRole(user)}>
+                                                {getRoleBadge(user.role?.name)}
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div onClick={() => onChangeRole(user)}>
+                                    {/* <div onClick={() => onChangeRole(user)}>
                                         {getRoleBadge(user.role?.name)}
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 {(user.phone || user.address) && (

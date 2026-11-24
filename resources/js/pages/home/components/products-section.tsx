@@ -15,10 +15,10 @@ interface ProductsSectionProps {
 type FilterType = 'all' | 'featured' | 'popular' | 'on_sale';
 
 export default function ProductsSection({ products }: ProductsSectionProps) {
-  const { t, isArabic } = useImports();
+  const { t, isArabic ,currency} = useImports();
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
-
   const productList = products?.data || [];
+  
 
   // Filter products based on active status filter tab
   const filteredProducts = useMemo(() => {

@@ -19,6 +19,7 @@ class WebsiteSettingService
 
     public function updateSettings(array $data, array $files = []): WebsiteSetting
     {
+        
         $setting = WebsiteSetting::first();
         if (! $setting) {
             $setting = new WebsiteSetting;
@@ -33,6 +34,8 @@ class WebsiteSettingService
         $setting->email = $data['email'] ?? null;
         $setting->phone = $data['phone'] ?? null;
         $setting->address = $data['address'] ?? null;
+        $setting->currency_ar = $data['currency_ar'] ?? null;
+        $setting->currency_en = $data['currency_en'] ?? null;
 
         // Handle Light Logo Upload / Removal
         if (isset($files['logo']) && $files['logo']) {

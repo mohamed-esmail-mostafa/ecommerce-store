@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppearance } from './use-appearance';
+import useWebsiteSettings from './use-website-settings';
 
 export default function useImports() {
   const { t, i18n } = useTranslation()
+  const {settings}=useWebsiteSettings()
   const { appearance, updateAppearance, resolvedAppearance } = useAppearance();
   const isArabic = i18n.language === "ar";
   const dark = appearance === "dark"
+
+
+  const currency = isArabic ? settings?.currency_ar : settings?.currency_en
 
 
 
@@ -65,6 +70,6 @@ export default function useImports() {
     dark,
     toggleLanguage,
     isDark,
-  
+    currency
   }
 }

@@ -21,7 +21,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, className = '' }: ProductCardProps) {
-  const { t, isArabic } = useImports();
+  const { t, isArabic ,currency} = useImports();
   const { settings } = useWebsiteSettings();
   const [isWishlisted, setIsWishlisted] = useState(false);
 
@@ -61,10 +61,8 @@ export default function ProductCard({ product, className = '' }: ProductCardProp
     : product.category?.name_en || product.category?.name_ar;
   const brandName = product.brandModel?.name || product.brand;
 
-  // Currency
-  const currency = isArabic
-    ? settings?.currency_ar || 'ر.س'
-    : settings?.currency_en || '$';
+
+ 
 
   const productUrl = `/product/${product.slug}/details`;
 

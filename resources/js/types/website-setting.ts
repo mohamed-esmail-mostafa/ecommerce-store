@@ -38,4 +38,6 @@ export interface WebsiteSettingFormValues {
     remove_logo?: boolean;
     remove_dark_logo?: boolean;
     remove_favicon?: boolean;
+    currency_en?:string;
+    currency_ar?:string;
 }

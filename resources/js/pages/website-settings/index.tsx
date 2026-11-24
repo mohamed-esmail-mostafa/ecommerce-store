@@ -24,6 +24,7 @@ import {
     Phone,
     MapPin,
     Search,
+    DollarSignIcon,
 } from 'lucide-react';
 import useImports from '@/hooks/use-imports';
 import DashboardLayout from '@/layouts/dashboard-layout';
@@ -36,7 +37,7 @@ interface Props {
 
 export default function WebsiteSettingsPage({ settings }: Props) {
     const { t } = useImports();
-    const [activeTab, setActiveTab] = useState<'general' | 'media' | 'contact'>('general');
+    const [activeTab, setActiveTab] = useState<'general' | 'media' | 'contact' | 'currency'>('general');
     const [logoFile, setLogoFile] = useState<File | null>(null);
     const [darkLogoFile, setDarkLogoFile] = useState<File | null>(null);
     const [faviconFile, setFaviconFile] = useState<File | null>(null);
@@ -65,6 +66,8 @@ export default function WebsiteSettingsPage({ settings }: Props) {
             email: settings?.email || '',
             phone: settings?.phone || '',
             address: settings?.address || '',
+            currency_en:settings?.currency_en || '',
+            currency_ar:settings?.currency_ar || '',
             logo: null,
             dark_logo: null,
             favicon: null,
@@ -86,6 +89,8 @@ export default function WebsiteSettingsPage({ settings }: Props) {
             formData.append('email', values.email || '');
             formData.append('phone', values.phone || '');
             formData.append('address', values.address || '');
+            formData.append('currency_en', values.currency_en || '');
+            formData.append('currency_ar', values.currency_ar || '');
 
             if (logoFile) {
                 formData.append('logo', logoFile);
@@ -188,6 +193,18 @@ export default function WebsiteSettingsPage({ settings }: Props) {
                             >
                                 <Mail size={16} />
                                 <span>{t('website_settings.contact_tab', 'Contact Info')}</span>
+                            </button>
+
+                              <button
+                                type="button"
+                                onClick={() => setActiveTab('currency')}
+                                className={`flex items-center gap-2 rounded-xl text-xs sm:text-sm px-4 py-2 font-medium transition-all ${activeTab === 'currency'
+                                        ? 'bg-primary text-primary-foreground shadow-xs'
+                                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+                                    }`}
+                            >
+                                <DollarSignIcon size={16} />
+                                <span>{t('website_settings.currency_tab')}</span>
                             </button>
                         </div>
 
@@ -451,6 +468,72 @@ export default function WebsiteSettingsPage({ settings }: Props) {
 
                                         />
                                     </div>
+                                </CardContent>
+                            </Card>
+                        )}
+
+
+                        {activeTab === 'currency' && (
+                            <Card className="border-gray-100 dark:border-gray-800 shadow-xs rounded-2xl">
+                                <CardHeader>
+                                    <CardTitle className="text-base font-bold flex items-center gap-2">
+                                        <Mail size={18} className="text-primary" />
+                                        {t('website_settings.contact_tab', 'Contact Information')}
+                                    </CardTitle>
+                                    <CardDescription className="text-xs">
+                                        Update support email, phone number, and physical office address.
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {/* Email */}
+                                        <div className="space-y-1.5">
+                                            <Label htmlFor="currency_ar" className="text-xs font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-1.5">
+                                                <DollarSignIcon size={14} className="text-gray-400" />
+                                                {t('website_settings.currency_ar')}
+                                            </Label>
+                                            <Input
+                                                id="currency_ar"
+                                                name="currency_ar"
+                                                type="text"
+                                                dir="ltr"
+                                                placeholder="EGP"
+                                                value={formik.values.currency_ar}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+
+                                            />
+                                            {formik.touched.currency_ar && formik.errors.currency_ar && (
+                                                <InputError message={formik.errors.currency_ar} />
+                                            )}
+                                        </div>
+                                        <div className="space-y-1.5">
+                                            <Label htmlFor="currency_en" className="text-xs font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-1.5">
+                                                <DollarSignIcon size={14} className="text-gray-400" />
+                                                {t('website_settings.currency_en')}
+                                            </Label>
+                                            <Input
+                                                id="currency_en"
+                                                name="currency_en"
+                                                type="text"
+                                                dir="ltr"
+                                                placeholder="EGP"
+                                                value={formik.values.currency_en}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+
+                                            />
+                                            {formik.touched.currency_en && formik.errors.currency_en && (
+                                                <InputError message={formik.errors.currency_en} />
+                                            )}
+                                        </div>
+
+                                        {/* Phone */}
+                                        
+                                    </div>
+
+                                    {/* Address */}
+                                   
                                 </CardContent>
                             </Card>
                         )}
