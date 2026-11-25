@@ -17,12 +17,15 @@ export default function AuthMenu() {
     const { t } = useImports()
    
     return (
+      <>
+      {auth ? <>
+      
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
                     variant="ghost"
                     size="sm"
-                    className="relative size-9 rounded-full p-0"
+                    className="relative size-9 rounded-full p-0 border border-orange-700"
                 >
                     <Avatar className="size-8">
                         <AvatarImage src={auth?.user?.avatar} alt={auth?.user?.name || 'User'} />
@@ -50,9 +53,9 @@ export default function AuthMenu() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 
-                {auth.user.role?.slug === "admin" ? 
+                {auth?.user?.role?.slug === "admin" ? 
                 <DropdownMenuItem asChild>
-                    <Link href="/settings/profile" className="flex items-center gap-2 text-xs">
+                    <Link href="/dashboard" className="flex items-center gap-2 text-xs">
                         <CircleDashed className="size-3.5" />
                         <span>{t('common.dashboard')}</span>
                     </Link>
@@ -69,5 +72,9 @@ export default function AuthMenu() {
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
+      
+      </>:null}
+      
+      </>
     )
 }
