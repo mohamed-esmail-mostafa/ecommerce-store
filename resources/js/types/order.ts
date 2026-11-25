@@ -1,4 +1,5 @@
 import { User } from './auth';
+import { Pagination } from './pagination';
 import { Product } from './product';
 
 export interface OrderItem {
@@ -12,6 +13,26 @@ export interface OrderItem {
     product?: Product | null;
     created_at?: string;
     updated_at?: string;
+}
+
+export interface OrderFilters {
+    search?: string;
+    status?: string;
+    payement_status?: string;
+}
+
+export interface OrderStats {
+    total_orders: number;
+    pending_orders: number;
+    completed_orders: number;
+    cancelled_orders: number;
+    total_revenue: number;
+}
+
+export interface OrdersPageProps {
+    orders: Pagination<Order>;
+    stats: OrderStats;
+    filters?: OrderFilters;
 }
 
 export interface Order {
@@ -35,6 +56,27 @@ export interface Order {
     notes?: string | null;
     items?: OrderItem[];
     user?: User | null;
+    product?: Product | null;
     created_at?: string;
     updated_at?: string;
+}
+
+export interface OrderFilters {
+    search?: string;
+    status?: string;
+    payement_status?: string;
+}
+
+export interface OrderStats {
+    total_orders: number;
+    pending_orders: number;
+    completed_orders: number;
+    cancelled_orders: number;
+    total_revenue: number;
+}
+
+export interface OrdersPageProps {
+    orders: Pagination<Order>;
+    stats: OrderStats;
+    filters?: OrderFilters;
 }

@@ -12,5 +12,7 @@ Route::controller(OrderController::class)->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::get('/orders/page', 'ordersPage')->name('orders.page');
+        Route::post('/orders/update-status/{id}', 'updateStatus')->name('orders.update-status');
+        Route::delete('/orders/delete/{id}', 'destroy')->name('orders.delete');
     });
 });

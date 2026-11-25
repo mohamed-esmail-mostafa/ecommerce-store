@@ -513,5 +513,170 @@
         "discount": "Off",
         "show_more": "Explore All Products",
         "no_products": "No products match this filter."
+    },
+    "account_page": {
+        "title": "My Account",
+        "subtitle": "Manage your profile information, password security, and track your orders.",
+        "member_since": "Member since {{date}}",
+        "role_badge": "Role",
+        "customer": "Customer",
+        "tabs": {
+            "profile": "Profile Details",
+            "security": "Security & Password",
+            "orders": "Order History"
+        },
+        "stats": {
+            "total_orders": "Total Orders",
+            "pending_orders": "Pending Orders",
+            "completed_orders": "Delivered Orders",
+            "total_spent": "Total Spent"
+        },
+        "profile": {
+            "title": "Personal Information",
+            "description": "Update your personal identity, contact number, and default delivery address.",
+            "name": "Full Name",
+            "name_placeholder": "Enter your full name",
+            "email": "Email Address",
+            "email_placeholder": "Enter your email address",
+            "phone": "Phone Number",
+            "phone_placeholder": "e.g. 01012345678",
+            "address": "Default Delivery Address",
+            "address_placeholder": "Enter street name, building number, apartment, city...",
+            "save_btn": "Save Changes",
+            "saving_btn": "Saving Changes...",
+            "success": "Your profile information has been updated successfully."
+        },
+        "security": {
+            "title": "Password & Security",
+            "description": "Ensure your account is protected with a strong and secure password.",
+            "current_password": "Current Password",
+            "current_password_placeholder": "Enter your current password",
+            "new_password": "New Password",
+            "new_password_placeholder": "Enter new password (min. 8 characters)",
+            "confirm_password": "Confirm New Password",
+            "confirm_password_placeholder": "Confirm new password",
+            "update_btn": "Update Password",
+            "updating_btn": "Updating Password...",
+            "success": "Your password has been updated successfully.",
+            "hint": "Password should contain at least 8 characters, including a mix of letters and numbers."
+        },
+        "orders": {
+            "title": "My Orders",
+            "description": "View and track the status of all your current and past purchases.",
+            "search_placeholder": "Search by order number...",
+            "all_status": "All Statuses",
+            "order_no": "Order #",
+            "date": "Date",
+            "items": "Items",
+            "payment": "Payment",
+            "status": "Status",
+            "total": "Total",
+            "actions": "Actions",
+            "view_details": "View Details",
+            "empty_title": "No orders found",
+            "empty_desc": "You haven't placed any orders matching this criteria yet.",
+            "empty_cta": "Start Shopping",
+            "modal": {
+                "title": "Order Details",
+                "subtitle": "Order number {{order_no}}",
+                "timeline": "Order Progress",
+                "shipping_details": "Delivery Address & Contact",
+                "customer_name": "Recipient Name",
+                "customer_phone": "Phone Number",
+                "customer_email": "Email Address",
+                "destination": "Delivery Address",
+                "location": "City / Governorate",
+                "order_items": "Purchased Items",
+                "subtotal": "Subtotal",
+                "shipping_cost": "Shipping Fee",
+                "free_shipping": "Free Shipping",
+                "discount": "Discount",
+                "total": "Order Total",
+                "notes": "Delivery Notes",
+                "payment_details": "Payment Summary",
+                "method": "Payment Method",
+                "payment_status": "Payment Status",
+                "close": "Close"
+            },
+            "status_badges": {
+                "pending": "Pending",
+                "processing": "Processing",
+                "completed": "Completed",
+                "delivered": "Delivered",
+                "cancelled": "Cancelled",
+                "failed": "Failed"
+            },
+            "payment_badges": {
+                "pending": "Unpaid",
+                "paid": "Paid",
+                "failed": "Failed",
+                "refunded": "Refunded"
+            },
+            "payment_methods": {
+                "cash_on_delivery": "Cash on Delivery",
+                "credit_card": "Credit Card",
+                "card": "Credit Card",
+                "wallet": "Digital Wallet"
+            }
+        }
+    },
+    "orders_page": {
+        "title": "Orders Management",
+        "subtitle": "Monitor customer orders, track fulfillment stages, and manage payment statuses.",
+        "stats": {
+            "total_orders": "Total Orders",
+            "pending_orders": "In Progress",
+            "completed_orders": "Delivered",
+            "total_revenue": "Total Revenue",
+            "cancelled_count": "{{count}} cancelled"
+        },
+        "filters": {
+            "search_placeholder": "Search by order #, name, email, or phone...",
+            "all_statuses": "All Statuses",
+            "all_payments": "All Payments"
+        },
+        "table": {
+            "order_no": "Order #",
+            "customer": "Customer",
+            "items": "Items",
+            "payment": "Payment",
+            "status": "Status",
+            "total": "Total",
+            "actions": "Actions",
+            "view_details": "View Details",
+            "update_status": "Update Status",
+            "delete_order": "Delete Order",
+            "no_orders": "No orders found",
+            "no_orders_desc": "There are no orders matching your current filters."
+        },
+        "statuses": {
+            "pending": "Pending",
+            "processing": "Processing",
+            "shipped": "Shipped",
+            "delivered": "Delivered",
+            "completed": "Completed",
+            "cancelled": "Cancelled",
+            "failed": "Failed"
+        },
+        "payment_statuses": {
+            "pending": "Unpaid",
+            "paid": "Paid",
+            "failed": "Failed",
+            "refunded": "Refunded"
+        },
+        "status_modal": {
+            "title": "Update Order Status",
+            "description": "Modify fulfillment and payment status for order {{order_no}}.",
+            "order_status": "Fulfillment Status",
+            "payment_status": "Payment Status",
+            "save": "Save Status",
+            "saving": "Updating...",
+            "success": "Order status updated successfully."
+        },
+        "delete": {
+            "title": "Delete Order",
+            "description": "Are you sure you want to delete order {{order_no}}? This action cannot be undone.",
+            "success": "Order deleted successfully."
+        }
     }
 }

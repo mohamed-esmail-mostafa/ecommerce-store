@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateOrderRequest extends FormRequest
 {
@@ -12,7 +13,7 @@ class UpdateOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +24,16 @@ class UpdateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'status' => [
+                'required',
+                'string',
+                Rule::in(['pending', 'processing', 'shipped', 'delivered', 'completed', 'cancelled', 'failed']),
+            ],
+            'payement_status' => [
+                'nullable',
+                'string',
+                Rule::in(['pending', 'paid', 'failed', 'refunded']),
+            ],
         ];
     }
 }

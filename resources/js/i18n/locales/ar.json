@@ -514,5 +514,170 @@
         "discount": "خصم",
         "show_more": "استكشف جميع المنتجات",
         "no_products": "لا توجد منتجات مطابقة لهذا التصنيف حالياً."
+    },
+    "account_page": {
+        "title": "حسابي الشخصي",
+        "subtitle": "إدارة معلومات ملفك الشخصي، أمان كلمة المرور، وتتبع سجل طلباتك.",
+        "member_since": "عضو منذ {{date}}",
+        "role_badge": "الصلاحية",
+        "customer": "عميل",
+        "tabs": {
+            "profile": "بيانات الحساب",
+            "security": "الأمان وكلمة المرور",
+            "orders": "سجل الطلبات"
+        },
+        "stats": {
+            "total_orders": "إجمالي الطلبات",
+            "pending_orders": "طلبات قيد التنفيذ",
+            "completed_orders": "طلبات مكتملة",
+            "total_spent": "إجمالي المشتريات"
+        },
+        "profile": {
+            "title": "المعلومات الشخصية",
+            "description": "تحديث بياناتك الشخصية، رقم التواصل، وعنوان التوصيل الافتراضي.",
+            "name": "الاسم بالكامل",
+            "name_placeholder": "أدخل اسمك بالكامل",
+            "email": "البريد الإلكتروني",
+            "email_placeholder": "أدخل بريدك الإلكتروني",
+            "phone": "رقم الهاتف",
+            "phone_placeholder": "مثال: 01012345678",
+            "address": "عنوان التوصيل الافتراضي",
+            "address_placeholder": "اسم الشارع، رقم العقار، الشقة، المدينة...",
+            "save_btn": "حفظ التغييرات",
+            "saving_btn": "جاري الحفظ...",
+            "success": "تم تحديث بيانات حسابك الشخصي بنجاح."
+        },
+        "security": {
+            "title": "كلمة المرور والأمان",
+            "description": "تأكد من حماية حسابك باختيار كلمة مرور قوية وفريدة.",
+            "current_password": "كلمة المرور الحالية",
+            "current_password_placeholder": "أدخل كلمة المرور الحالية",
+            "new_password": "كلمة المرور الجديدة",
+            "new_password_placeholder": "أدخل كلمة مرور جديدة (8 خانات على الأقل)",
+            "confirm_password": "تأكيد كلمة المرور الجديدة",
+            "confirm_password_placeholder": "أعد إدخال كلمة المرور للتأكيد",
+            "update_btn": "تحديث كلمة المرور",
+            "updating_btn": "جاري التحديث...",
+            "success": "تم تغيير كلمة المرور بنجاح.",
+            "hint": "يجب ألا تقل كلمة المرور عن 8 أحرف وأرقام مع مراعاة القوة."
+        },
+        "orders": {
+            "title": "طلباتي",
+            "description": "استعراض ومتابعة حالات جميع طلباتك الحالية والسابقة.",
+            "search_placeholder": "ابحث برقم الطلب...",
+            "all_status": "جميع الحالات",
+            "order_no": "رقم الطلب",
+            "date": "التاريخ",
+            "items": "المنتجات",
+            "payment": "الدفع",
+            "status": "الحالة",
+            "total": "الإجمالي",
+            "actions": "الإجراءات",
+            "view_details": "عرض التفاصيل",
+            "empty_title": "لا توجد طلبات",
+            "empty_desc": "لم تقم بإنشاء أي طلبات مطابقة لهذا البحث بعد.",
+            "empty_cta": "ابدأ التسوق الآن",
+            "modal": {
+                "title": "تفاصيل الطلب",
+                "subtitle": "رقم الطلب {{order_no}}",
+                "timeline": "مراحل الطلب",
+                "shipping_details": "بيانات التوصيل والتواصل",
+                "customer_name": "اسم المستلم",
+                "customer_phone": "رقم الهاتف",
+                "customer_email": "البريد الإلكتروني",
+                "destination": "عنوان التوصيل",
+                "location": "المدينة / المحافظة",
+                "order_items": "المنتجات المشتراة",
+                "subtotal": "المجموع الفرعي",
+                "shipping_cost": "تكلفة الشحن",
+                "free_shipping": "شحن مجاني",
+                "discount": "الخصم",
+                "total": "إجمالي الطلب",
+                "notes": "ملاحظات التوصيل",
+                "payment_details": "ملخص الدفع",
+                "method": "طريقة الدفع",
+                "payment_status": "حالة الدفع",
+                "close": "إغلاق"
+            },
+            "status_badges": {
+                "pending": "قيد الانتظار",
+                "processing": "جاري التجهيز",
+                "completed": "مكتمل",
+                "delivered": "تم التوصيل",
+                "cancelled": "ملغي",
+                "failed": "فشل"
+            },
+            "payment_badges": {
+                "pending": "غير مدفوع",
+                "paid": "تم الدفع",
+                "failed": "فشل الدفع",
+                "refunded": "مسترجع"
+            },
+            "payment_methods": {
+                "cash_on_delivery": "الدفع عند الاستلام",
+                "credit_card": "بطاقة ائتمان",
+                "card": "بطاقة ائتمان",
+                "wallet": "محفظة إلكترونية"
+            }
+        }
+    },
+    "orders_page": {
+        "title": "إدارة الطلبات",
+        "subtitle": "متابعة طلبات العملاء، مراحل التجهيز والشحن، وحالات الدفع.",
+        "stats": {
+            "total_orders": "إجمالي الطلبات",
+            "pending_orders": "قيد التنفيذ",
+            "completed_orders": "تم التوصيل",
+            "total_revenue": "إجمالي الإيرادات",
+            "cancelled_count": "{{count}} ملغي"
+        },
+        "filters": {
+            "search_placeholder": "ابحث برقم الطلب، اسم العميل، البريد أو الهاتف...",
+            "all_statuses": "جميع الحالات",
+            "all_payments": "جميع حالات الدفع"
+        },
+        "table": {
+            "order_no": "رقم الطلب",
+            "customer": "العميل",
+            "items": "المنتجات",
+            "payment": "الدفع",
+            "status": "الحالة",
+            "total": "الإجمالي",
+            "actions": "الإجراءات",
+            "view_details": "عرض التفاصيل",
+            "update_status": "تحديث الحالة",
+            "delete_order": "حذف الطلب",
+            "no_orders": "لا توجد طلبات",
+            "no_orders_desc": "لا توجد طلبات مطابقة لمعايير البحث الحالية."
+        },
+        "statuses": {
+            "pending": "قيد الانتظار",
+            "processing": "جاري التجهيز",
+            "shipped": "تم الشحن",
+            "delivered": "تم التوصيل",
+            "completed": "مكتمل",
+            "cancelled": "ملغي",
+            "failed": "فشل"
+        },
+        "payment_statuses": {
+            "pending": "غير مدفوع",
+            "paid": "تم الدفع",
+            "failed": "فشل الدفع",
+            "refunded": "مسترجع"
+        },
+        "status_modal": {
+            "title": "تحديث حالة الطلب",
+            "description": "تعديل حالة التجهيز وحالة الدفع للطلب رقم {{order_no}}.",
+            "order_status": "حالة الطلب",
+            "payment_status": "حالة الدفع",
+            "save": "حفظ التغييرات",
+            "saving": "جاري التحديث...",
+            "success": "تم تحديث حالة الطلب بنجاح."
+        },
+        "delete": {
+            "title": "حذف الطلب",
+            "description": "هل أنت متأكد من حذف الطلب رقم {{order_no}}؟ لا يمكن التراجع عن هذا الإجراء.",
+            "success": "تم حذف الطلب بنجاح."
+        }
     }
 }

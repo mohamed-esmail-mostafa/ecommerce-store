@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
 use App\Services\CartService;
 use App\Services\OrderService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -66,16 +68,51 @@ class OrderController extends Controller
     }
 
     /**
-     * Display order management / user orders list.
+     * Display order management / orders list with filtering and stats.
      */
-    public function ordersPage(): Response
+    public function ordersPage(Request $request): Response
     {
-        $orders = Auth::user()?->hasRole('admin')
-            ? $this->order_service->GetAllOrders()
-            : $this->order_service->GetUserOrders(Auth::id());
+        $search = $request->input('search');
+        $status = $request->filled('status') && $request->input('status') !== 'all'
+            ? (string) $request->input('status')
+            : null;
+        $paymentStatus = $request->filled('payement_status') && $request->input('payement_status') !== 'all'
+            ? (string) $request->input('payement_status')
+            : null;
+        $perPage = (int) $request->input('per_page', 10);
 
         return Inertia::render('orders/index', [
-            'orders' => $orders,
+            'orders' => $this->order_service->GetAllOrders($search, $status, $paymentStatus, $perPage),
+            'stats' => $this->order_service->GetOrderStats(),
+            'filters' => [
+                'search' => $search ?? '',
+                'status' => $status ?? 'all',
+                'payement_status' => $paymentStatus ?? 'all',
+            ],
         ]);
+    }
+
+    /**
+     * Update an order's status and payment status.
+     */
+    public function updateStatus(UpdateOrderRequest $request, int $id): RedirectResponse
+    {
+        $this->order_service->UpdateOrderStatus(
+            $id,
+            $request->validated('status'),
+            $request->validated('payement_status')
+        );
+
+        return redirect()->back()->with('success', 'Order status updated successfully.');
+    }
+
+    /**
+     * Delete an existing order.
+     */
+    public function destroy(int $id): RedirectResponse
+    {
+        $this->order_service->DeleteOrder($id);
+
+        return redirect()->back()->with('success', 'Order deleted successfully.');
     }
 }

@@ -11,7 +11,7 @@ export default function NoDataFound({
     const { t } = useImports()
 
     return (
-        <div className="flex min-h-[300px] h-full flex-col items-center justify-center px-4 py-10 text-center">
+        <div className="flex min-h-75 h-full flex-col items-center justify-center px-4 py-10 text-center">
 
             {/* Icon */}
             <div className="mb-5 flex size-20 items-center justify-center rounded-full bg-primary/10">

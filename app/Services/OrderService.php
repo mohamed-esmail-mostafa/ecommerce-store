@@ -12,11 +12,76 @@ use InvalidArgumentException;
 class OrderService
 {
     /**
-     * Get paginated orders for admin overview.
+     * Get paginated orders for admin overview with optional search and status filtering.
      */
-    public function GetAllOrders(): LengthAwarePaginator
+    public function GetAllOrders(
+        ?string $search = null,
+        ?string $status = null,
+        ?string $paymentStatus = null,
+        int $perPage = 10
+    ): LengthAwarePaginator {
+        return Order::query()
+            ->with(['items.product.images', 'product.images', 'user'])
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('order_no', 'like', "%{$search}%")
+                        ->orWhere('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhere('phone', 'like', "%{$search}%");
+                });
+            })
+            ->when($status, function ($query, $status) {
+                $query->where('status', $status);
+            })
+            ->when($paymentStatus, function ($query, $paymentStatus) {
+                $query->where('payement_status', $paymentStatus);
+            })
+            ->latest('id')
+            ->paginate($perPage)
+            ->withQueryString();
+    }
+
+    /**
+     * Get aggregated order statistics for the dashboard.
+     *
+     * @return array<string, int|float>
+     */
+    public function GetOrderStats(): array
     {
-        return Order::with(['items.product', 'user'])->latest()->paginate(10);
+        return [
+            'total_orders' => Order::count(),
+            'pending_orders' => Order::whereIn('status', ['pending', 'processing', 'shipped'])->count(),
+            'completed_orders' => Order::whereIn('status', ['completed', 'delivered'])->count(),
+            'cancelled_orders' => Order::whereIn('status', ['cancelled', 'failed'])->count(),
+            'total_revenue' => (float) Order::whereNotIn('status', ['cancelled', 'failed'])->sum('total'),
+        ];
+    }
+
+    /**
+     * Update an order's fulfillment and/or payment status.
+     */
+    public function UpdateOrderStatus(int $id, string $status, ?string $paymentStatus = null): Order
+    {
+        $order = Order::findOrFail($id);
+        $order->status = $status;
+
+        if ($paymentStatus !== null && $paymentStatus !== '') {
+            $order->payement_status = $paymentStatus;
+        }
+
+        $order->save();
+
+        return $order->fresh(['items.product.images', 'product.images', 'user']);
+    }
+
+    /**
+     * Delete an existing order.
+     */
+    public function DeleteOrder(int $id): bool
+    {
+        $order = Order::findOrFail($id);
+
+        return (bool) $order->delete();
     }
 
     /**

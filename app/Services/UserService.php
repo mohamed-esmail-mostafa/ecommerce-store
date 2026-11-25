@@ -115,4 +115,35 @@ class UserService
 
         return (bool) $user->delete();
     }
+
+    /**
+     * Update customer account profile.
+     */
+    public function UpdateAccountProfile(User $user, array $data): User
+    {
+        $user->fill([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'] ?? null,
+            'address' => $data['address'] ?? null,
+        ]);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
+
+        return $user->fresh(['role']);
+    }
+
+    /**
+     * Update customer account password.
+     */
+    public function UpdateAccountPassword(User $user, string $newPassword): void
+    {
+        $user->forceFill([
+            'password' => $newPassword,
+        ])->save();
+    }
 }

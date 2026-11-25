@@ -6,4 +6,6 @@ export type * from './role';
 export type * from './supplier';
 export type * from './review';
 export type { UserFilters, UsersPageProps, UserFormValues } from './user';
+export type * from './account';
+export type * from './order';
 export type * from './pagination';

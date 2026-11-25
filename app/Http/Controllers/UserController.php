@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangeUserRoleRequest;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateAccountPasswordRequest;
+use App\Http\Requests\UpdateAccountProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Order;
+use App\Services\CategoryService;
 use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
@@ -89,5 +93,53 @@ class UserController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * Display the authenticated user's account page with profile & orders.
+     */
+    public function my_account(Request $request, CategoryService $categoryService): Response
+    {
+        $user = $request->user()->load('role');
+
+        $orders = Order::where('user_id', $user->id)
+            ->with(['items.product.images', 'product.images'])
+            ->latest('id')
+            ->paginate(10)
+            ->withQueryString();
+
+        $orderStats = [
+            'total_orders' => Order::where('user_id', $user->id)->count(),
+            'pending_orders' => Order::where('user_id', $user->id)->whereIn('status', ['pending', 'processing'])->count(),
+            'completed_orders' => Order::where('user_id', $user->id)->whereIn('status', ['completed', 'delivered'])->count(),
+            'total_spent' => (float) Order::where('user_id', $user->id)->whereNotIn('status', ['cancelled', 'failed'])->sum('total'),
+        ];
+
+        return Inertia::render('account/index', [
+            'user' => $user,
+            'orders' => $orders,
+            'orderStats' => $orderStats,
+            'categories' => $categoryService->GetAll(),
+        ]);
+    }
+
+    /**
+     * Update customer profile info.
+     */
+    public function update_account_profile(UpdateAccountProfileRequest $request): RedirectResponse
+    {
+        $this->user_service->UpdateAccountProfile($request->user(), $request->validated());
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
+    }
+
+    /**
+     * Update customer account password.
+     */
+    public function update_account_password(UpdateAccountPasswordRequest $request): RedirectResponse
+    {
+        $this->user_service->UpdateAccountPassword($request->user(), $request->validated('password'));
+
+        return redirect()->back()->with('success', 'Password updated successfully.');
     }
 }
