@@ -19,7 +19,7 @@ class WebsiteSettingService
 
     public function updateSettings(array $data, array $files = []): WebsiteSetting
     {
-        
+
         $setting = WebsiteSetting::first();
         if (! $setting) {
             $setting = new WebsiteSetting;

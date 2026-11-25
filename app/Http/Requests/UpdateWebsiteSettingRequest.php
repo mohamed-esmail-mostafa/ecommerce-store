@@ -39,7 +39,7 @@ class UpdateWebsiteSettingRequest extends FormRequest
             'remove_dark_logo' => ['nullable', 'boolean'],
             'remove_favicon' => ['nullable', 'boolean'],
             'currency_ar' => ['string'],
-            'currency_en' => [ 'string'],
+            'currency_en' => ['string'],
         ];
     }
 }

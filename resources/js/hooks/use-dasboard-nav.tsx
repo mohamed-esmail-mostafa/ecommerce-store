@@ -11,6 +11,7 @@ import {
     ShoppingCart,
     Tag,
     Users2,
+    Star,
 } from 'lucide-react';
 
 export default function useDasboardnav() {
@@ -65,6 +66,11 @@ export default function useDasboardnav() {
             title: t('dashboard.sidebar.users'),
             href: '/users/page',
             icon: Users2,
+        },
+        {
+            title: t('dashboard.sidebar.reviews', 'Reviews'),
+            href: '/reviews/page',
+            icon: Star,
         },
     ];
 

@@ -26,3 +26,4 @@ require __DIR__.'/roles.php';
 require __DIR__.'/brands.php';
 require __DIR__.'/cart.php';
 require __DIR__.'/users.php';
+require __DIR__.'/reviews.php';
