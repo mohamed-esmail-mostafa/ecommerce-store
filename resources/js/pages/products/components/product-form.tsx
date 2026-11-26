@@ -28,8 +28,10 @@ import {
   Sparkles,
   Tag,
   Ticket,
+  Trash2,
   Truck,
   User2,
+  X,
 } from 'lucide-react';
 import InputError from '@/components/input-error';
 import ImagesPicker from '@/components/ui/images-picker';
@@ -37,8 +39,18 @@ import RichTextEditor from '@/components/ui/rich-text-editor';
 import { Category } from '@/types/category';
 import { Supplier } from '@/types/supplier';
 import { Brand } from '@/types/brand';
+import { ProductImage } from '@/types/product';
 
-export default function ProductForm({formik,categories,brands,suppliers,selectedCategory,selectedBrand}:any) {
+export default function ProductForm({
+  formik,
+  categories,
+  brands,
+  suppliers,
+  selectedCategory,
+  selectedBrand,
+  existingImages = [],
+  onRemoveExistingImage,
+}: any) {
   const {t}=useImports()
   return (
     <form onSubmit={formik.handleSubmit} className="container mx-auto px-4 pb-16">
@@ -246,7 +258,39 @@ export default function ProductForm({formik,categories,brands,suppliers,selected
                   {t('products.media_desc', 'Upload product gallery images (PNG, JPG, WEBP)')}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="pt-4">
+              <CardContent className="pt-4 space-y-4">
+                {existingImages && existingImages.length > 0 && (
+                  <div className="space-y-2">
+                    <Label className="text-xs font-semibold text-muted-foreground">
+                      {t('products.existing_media', 'Current Gallery Images')}
+                    </Label>
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
+                      {existingImages.map((img: ProductImage) => (
+                        <div
+                          key={img.id}
+                          className="relative group aspect-square rounded-xl overflow-hidden border bg-muted/30"
+                        >
+                          <img
+                            src={img.image}
+                            alt="Product"
+                            className="w-full h-full object-cover"
+                          />
+                          {onRemoveExistingImage && (
+                            <button
+                              type="button"
+                              onClick={() => onRemoveExistingImage(img.id)}
+                              title={t('common.delete', 'Remove image')}
+                              className="absolute top-1.5 end-1.5 size-6 rounded-full bg-destructive text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm cursor-pointer"
+                            >
+                              <X className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <ImagesPicker
                   name="images"
                   multiple
